@@ -14,6 +14,17 @@ import java.util.List;
  **/
 public class Player implements Interface{
 
+    /**
+     *
+     * 正常状态：0
+     * 进入监狱状态：1
+     * 破产：2
+     *
+     */
+    private static final int NOMARL = 0;
+    private static final int IN_JAIL = 1;
+    private static final int BANKRUPCY = 2;
+
     /*
      * 姓名
      */
@@ -35,9 +46,19 @@ public class Player implements Interface{
     private int y;
 
     /*
+     * 玩家状态
+     */
+    private int state;
+
+    /*
      * 剩余坐牢天数
      */
     private int inJail;
+
+    /*
+     * 房屋数
+     */
+    private List<Piece> pieces = new ArrayList<Piece>();
 
     /*
      * 房屋数
@@ -89,6 +110,14 @@ public class Player implements Interface{
         this.inJail = inJail;
     }
 
+    public List<Piece> getPieces() {
+        return pieces;
+    }
+
+    public void setPieces(List<Piece> pieces) {
+        this.pieces = pieces;
+    }
+
     public List<House> getHouses() {
         return houses;
     }
@@ -105,6 +134,11 @@ public class Player implements Interface{
         this.hotels = hotels;
     }
 
+    public void putIntoJail(){
+        this.state = IN_JAIL;
+        this.inJail = 3;
+    }
+
     @Override
     public void updateData(){
 
@@ -112,6 +146,9 @@ public class Player implements Interface{
 
     @Override
     public void initGame() {
+        this.cash = 15000000;
+        this.houses = null;
+        this.hotels = null;
 
     }
 }

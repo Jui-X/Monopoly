@@ -1,5 +1,7 @@
 package com.ooad.controller;
 
+import com.ooad.model.Bank;
+
 /**
  * @param: none
  * @description: 房屋Controller
@@ -7,4 +9,5 @@ package com.ooad.controller;
  * @create: 2018-12-19 21:37
  **/
 public class HouseController {
+
 }

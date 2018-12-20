@@ -7,4 +7,5 @@ package com.ooad.controller;
  * @create: 2018-12-19 21:37
  **/
 public class HotelController {
+
 }
