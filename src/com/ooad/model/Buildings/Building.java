@@ -31,6 +31,11 @@ public class Building {
      */
     protected Piece piece;
 
+    /*
+     * 所属地皮
+     */
+    protected Player owner;
+
     public String getName() {
         return name;
     }
@@ -61,5 +66,13 @@ public class Building {
 
     public void setPiece(Piece piece) {
         this.piece = piece;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Player owner) {
+        this.owner = owner;
     }
 }

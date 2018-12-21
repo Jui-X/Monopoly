@@ -1,4 +1,4 @@
-package com.ooad.controller;
+package com.ooad.controller.ModelController;
 
 import com.ooad.model.Dice;
 import com.ooad.model.Player;

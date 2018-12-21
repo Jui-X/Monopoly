@@ -1,18 +1,32 @@
 package com.ooad.model;
 
 /**
- * @param: none
+ * @param: nonez
  * @description: 方块Model
  * @author: KingJ
  * @create: 2018-12-19 20:13
  **/
-public class Square implements Interface{
+public class Square{
 
+    /*
+     * 方格X坐标
+     */
     private int X;
 
+    /*
+     * 方格Y坐标
+     */
     private int Y;
 
+    /*
+     * 下一块方格
+     */
     private Square nextSqaure;
+
+    /*
+     * 方格数量
+     */
+    private Piece piece;
 
     public int getX() {
         return X;
@@ -38,13 +52,8 @@ public class Square implements Interface{
         this.nextSqaure = nextSqaure;
     }
 
-    @Override
-    public void updateData(){
-
+    public Square(){
+        this.piece = new Piece(this);
     }
 
-    @Override
-    public void initGame(){
-
-    }
 }

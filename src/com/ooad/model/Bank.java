@@ -6,7 +6,7 @@ package com.ooad.model;
  * @author: KingJ
  * @create: 2018-12-19 20:27
  **/
-public class Bank implements Interface{
+public class Bank{
 
     /*
      * 房屋数量
@@ -35,17 +35,8 @@ public class Bank implements Interface{
     }
 
     public Bank(){
-        initGame();
-    }
-
-    @Override
-    public void updateData(){
-
-    }
-
-    @Override
-    public void initGame(){
         this.houseNum = 32;
         this.hotelNum = 12;
     }
+
 }

@@ -1,51 +1,58 @@
 package com.ooad.model;
 
 
+import com.ooad.model.Buildings.Building;
+
+import java.time.Period;
+import java.util.List;
+
 /**
  * @param: none
  * @description: 地皮Model
  * @author: KingJ
  * @create: 2018-12-19 20:31
  **/
-public class Piece extends Square implements Interface{
-
-    private static final int MAX_HOUSENUM = 4;
-
-    private static final int MAX_HOTELNUM = 1;
-
-    private static final int ORANGE_PIECE = 1;
-
-    private static final int PURPLE_PIECE = 2;
+public class Piece{
 
     /*
      * 房屋数
      */
-    private int houseNum = 0;
+    private int houseNum;
 
     /*
      * 旅馆数
      */
-    private int hotelNum = 0;
+    private int hotelNum;
 
     /*
      * 颜色
      */
-    private int color = 0;
+    private int color;
 
     /*
      * 可购买性
      */
-    protected boolean purchasability = true;
+    protected boolean purchasability;
 
     /*
      * 价格
      */
-    protected int price = 0;
+    protected int price;
 
     /*
      * 建筑拥有者姓名
      */
-    protected Player owner = null;
+    protected Player owner;
+
+    /*
+     * 建筑列表
+     */
+    protected List<Building> building;
+
+    /*
+     * 所属方格
+     */
+    protected Square square = null;
 
     public int getHouseNum() {
         return houseNum;
@@ -95,13 +102,30 @@ public class Piece extends Square implements Interface{
         this.owner = owner;
     }
 
-    @Override
-    public void updateData(){
-
+    public List<Building> getBuilding() {
+        return building;
     }
 
-    @Override
-    public void initGame(){
+    public void setBuilding(List<Building> building) {
+        this.building = building;
+    }
 
+    public Square getSquare() {
+        return square;
+    }
+
+    public void setSquare(Square square) {
+        this.square = square;
+    }
+
+    public Piece(Square square){
+        this.houseNum = 0;
+        this.hotelNum = 0;
+        this.color = 0;
+        this.price = 10000;
+        this.purchasability = true;
+        this.owner = null;
+        this.building = null;
+        this.square = square;
     }
 }

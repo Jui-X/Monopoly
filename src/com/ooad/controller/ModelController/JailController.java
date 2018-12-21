@@ -1,4 +1,4 @@
-package com.ooad.controller;
+package com.ooad.controller.ModelController;
 
 /**
  * @param: none

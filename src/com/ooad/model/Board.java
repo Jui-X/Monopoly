@@ -6,19 +6,28 @@ package com.ooad.model;
  * @author: KingJ
  * @create: 2018-12-19 19:59
  **/
-public class Board implements Interface{
+public class Board{
 
-    private static final int MAP_SQUARE = 36;
+    /*
+     * 方格最大数量
+     */
+    private static final int MAX_SQUARE = 36;
 
+    /*
+     * 方格数量
+     */
     private int squareNum = 0;
 
-    @Override
-    public void updateData(){
-
+    public int getSquareNum() {
+        return squareNum;
     }
 
-    @Override
-    public void initGame(){
-        this.squareNum = MAP_SQUARE;
+    public void setSquareNum(int squareNum) {
+        this.squareNum = squareNum;
     }
+
+    public Board(){
+        this.squareNum = MAX_SQUARE;
+    }
+
 }

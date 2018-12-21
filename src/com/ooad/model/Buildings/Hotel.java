@@ -11,7 +11,7 @@ import com.ooad.model.Piece;
 public class Hotel extends Building{
 
     public Hotel(Piece piece){
-        this.price = 1000;
+        this.price = 15000;
         this.piece = piece;
     }
 }

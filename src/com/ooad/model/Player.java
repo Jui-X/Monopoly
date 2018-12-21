@@ -12,18 +12,7 @@ import java.util.List;
  * @author: KingJ
  * @create: 2018-12-19 20:11
  **/
-public class Player implements Interface{
-
-    /**
-     *
-     * 正常状态：0
-     * 进入监狱状态：1
-     * 破产：2
-     *
-     */
-    private static final int NOMARL = 0;
-    private static final int IN_JAIL = 1;
-    private static final int BANKRUPCY = 2;
+public class Player{
 
     /*
      * 姓名
@@ -102,6 +91,14 @@ public class Player implements Interface{
         this.y = y;
     }
 
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
     public int getInJail() {
         return inJail;
     }
@@ -134,21 +131,9 @@ public class Player implements Interface{
         this.hotels = hotels;
     }
 
-    public void putIntoJail(){
-        this.state = IN_JAIL;
-        this.inJail = 3;
-    }
-
-    @Override
-    public void updateData(){
-
-    }
-
-    @Override
-    public void initGame() {
+    public Player(){
         this.cash = 15000000;
         this.houses = null;
         this.hotels = null;
-
     }
 }

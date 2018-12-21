@@ -6,7 +6,7 @@ package com.ooad.model;
  * @author: KingJ
  * @create: 2018-12-19 20:12
  **/
-public class Dice implements Interface{
+public class Dice{
 
     /*
      * 骰子运行状态
@@ -60,16 +60,5 @@ public class Dice implements Interface{
     public Dice(){
         this.point = 0;
     }
-
-    @Override
-    public void updateData(){
-
-    }
-
-    @Override
-    public void initGame(){
-
-    }
-
 
 }

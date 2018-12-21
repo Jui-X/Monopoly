@@ -1,4 +1,4 @@
-package com.ooad.controller;
+package com.ooad.controller.ModelController;
 
 import com.ooad.model.Bank;
 
@@ -34,5 +34,9 @@ public class BankController {
     public boolean buildHotel(){
         bank.setHotelNum(bank.getHotelNum()-1);
         return true;
+    }
+
+    public void acution(){
+        bank.setHouseNum(bank.getHotelNum() - 1);
     }
 }
