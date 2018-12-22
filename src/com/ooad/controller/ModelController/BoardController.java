@@ -19,6 +19,7 @@ public class BoardController {
 
     public BoardController(Board board){
         this.board = board;
+        // 初始化所有方格
         for (int i = 0; i < board.getSquareNum(); i++){
             this.squareList.add(new Square());
         }

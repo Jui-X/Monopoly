@@ -12,13 +12,18 @@ import com.ooad.model.Player;
  **/
 public class HouseController {
 
-    private House house;
+    private static final int NORAMAL = 1;
+    private static final int PLEDGED = 0;
 
-    public HouseController(House house){
+    private House house;
+    private Player player;
+
+    public HouseController(House house, Player player){
         this.house = house;
+        this.player = player;
     }
 
-    public void houseOwner(Player player){
+    public void houseOwner(){
         house.setOwner(player);
     }
 

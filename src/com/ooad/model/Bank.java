@@ -6,7 +6,7 @@ package com.ooad.model;
  * @author: KingJ
  * @create: 2018-12-19 20:27
  **/
-public class Bank{
+public class Bank extends Player{
 
     /*
      * 房屋数量

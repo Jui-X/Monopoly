@@ -3,7 +3,6 @@ package com.ooad.model;
 
 import com.ooad.model.Buildings.Building;
 
-import java.time.Period;
 import java.util.List;
 
 /**
@@ -38,6 +37,11 @@ public class Piece{
      * 价格
      */
     protected int price;
+
+    /*
+     * 状态
+     */
+    protected int state;
 
     /*
      * 建筑拥有者姓名
@@ -92,6 +96,14 @@ public class Piece{
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 
     public Player getOwner() {

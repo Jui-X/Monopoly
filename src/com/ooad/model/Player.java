@@ -12,7 +12,7 @@ import java.util.List;
  * @author: KingJ
  * @create: 2018-12-19 20:11
  **/
-public class Player{
+public class Player {
 
     /*
      * 姓名

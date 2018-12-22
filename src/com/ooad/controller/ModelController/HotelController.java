@@ -11,15 +11,19 @@ import com.ooad.model.Player;
  **/
 public class HotelController {
 
-    private Hotel hotel;
+    private static final int NORAMAL = 1;
+    private static final int PLEDGED = 0;
 
-    public HotelController(Hotel hotel){
+    private Hotel hotel;
+    private Player player;
+
+    public HotelController(Hotel hotel, Player player){
         this.hotel = hotel;
+        this.player = player;
     }
 
-    public void hotelOwner(Player player){
+    public void hotelOwner(){
         hotel.setOwner(player);
     }
-
 
 }

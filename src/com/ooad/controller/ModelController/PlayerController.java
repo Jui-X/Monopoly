@@ -6,7 +6,6 @@ import com.ooad.model.Dice;
 import com.ooad.model.Piece;
 import com.ooad.model.Player;
 
-import java.util.List;
 
 /**
  * @param: none
@@ -84,6 +83,11 @@ public class PlayerController {
         }
     }
 
+    public void goPass(int reward){
+        // 经过起点奖励
+        player.setCash(player.getCash() + reward);
+    }
+
     public boolean purchasePiece(){
         // 玩家现金减少，减少数量对应相应的地皮价格
         player.setCash(player.getCash() - piece.getPrice());
@@ -121,6 +125,62 @@ public class PlayerController {
     public void payRent(int rent){
         // 交过路费
         player.setCash(player.getCash() - rent);
+    }
+
+    public void cashOutPiece(){
+        // 将地皮抵押，获得半数现金
+        int cash = (int) (player.getCash() + piece.getPrice() * 0.5);
+        player.setCash(cash);
+    }
+
+    public void redeemPiece(){
+        // 花费半数现金赎回地皮
+        int cash = (int) (player.getCash() - piece.getPrice() * 0.5);
+        player.setCash(cash);
+    }
+
+    public void cashOutHouse(){
+        // 卖房，获得半数现金
+        int cash = (int) (player.getCash() + house.getPrice() * 0.5);
+        player.setCash(cash);
+    }
+
+    public void cashOutHotel(){
+        // 卖旅馆，获得半数现金
+        int cash = (int) (player.getCash() + hotel.getPrice() * 0.5);
+        player.setCash(cash);
+    }
+
+    public int houseValue(){
+        // 计算玩家当前所有房产总价
+        int totalValue = 0;
+        for(House h : player.getHouses()){
+            totalValue += (h.getPrice() * 0.5);
+        }
+        return totalValue;
+    }
+
+    public int hotelValue(){
+        // 计算玩家当前所有旅馆总价
+        int totalValue = 0;
+        for(Hotel h : player.getHotels()){
+            totalValue += (h.getPrice() * 0.5);
+        }
+        return totalValue;
+    }
+
+    public int getAssets(){
+        // 计算玩家当前总资产
+        int assets = player.getCash() + houseValue() + hotelValue();
+        return assets;
+    }
+
+    public boolean bankrupt(){
+        // 若玩家总资产小于等于0，则宣布破产
+        if (getAssets() <= 0){
+            return true;
+        }
+        return false;
     }
 
     // 拍卖竞价

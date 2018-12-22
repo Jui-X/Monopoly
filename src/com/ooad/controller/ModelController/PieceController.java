@@ -17,6 +17,8 @@ public class PieceController {
     private static final int MAX_HOTELNUM = 1;
     private static final int ORANGE_PIECE = 1;
     private static final int PURPLE_PIECE = 2;
+    private static final int NORAMAL = 1;
+    private static final int PLEDGED = 0;
 
     private Piece piece;
     private Player player;
@@ -38,7 +40,7 @@ public class PieceController {
         this.hotel = hotel;
     }
 
-    public void setOwner(){
+    public void pieceOwner(){
         // 更新地皮拥有者
         piece.setOwner(player);
     }
@@ -50,6 +52,18 @@ public class PieceController {
             return true;
         }
         return false;
+    }
+
+    public void isPledged(){
+        if(piece.getState() == NORAMAL){
+            piece.setState(PLEDGED);
+        }
+    }
+
+    public void isRedeemed(){
+        if (piece.getState() == PLEDGED){
+            piece.setState(NORAMAL);
+        }
     }
 
     public void houseBuilt(){
@@ -68,8 +82,11 @@ public class PieceController {
 
     public int getRent(){
         // 计算总租金
-        double rent = piece.getHouseNum() * house.getPrice() * 0.1 +
-                piece.getHotelNum() * hotel.getPrice() * 0.05;
-        return (int)rent;
+        if (piece.getState() == NORAMAL){
+            double rent = piece.getHouseNum() * house.getPrice() * 0.1 +
+                    piece.getHotelNum() * hotel.getPrice() * 0.05;
+            return (int)rent;
+        }
+        else {return 0;}
     }
 }

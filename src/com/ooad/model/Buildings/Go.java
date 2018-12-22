@@ -1,5 +1,7 @@
 package com.ooad.model.Buildings;
 
+import com.ooad.controller.ModelController.PlayerController;
+
 /**
  * @param: none
  * @description: 起点UI
@@ -11,5 +13,15 @@ public class Go extends Building{
     /*
      * 经过起点奖励金
      */
-    private static final int rewardMoney = 200;
+    private static final int rewardMoney = 2000;
+    private PlayerController playerController;
+
+    public Go(PlayerController playerController){
+        this.playerController = playerController;
+    }
+
+    public void passGo(){
+        // 经过起点奖励
+        playerController.goPass(rewardMoney);
+    }
 }

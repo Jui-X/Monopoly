@@ -27,12 +27,17 @@ public class Building {
     protected int price;
 
     /*
+     * 状态
+     */
+    protected int state;
+
+    /*
      * 所属地皮
      */
     protected Piece piece;
 
     /*
-     * 所属地皮
+     * 所属玩家
      */
     protected Player owner;
 
@@ -58,6 +63,14 @@ public class Building {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 
     public Piece getPiece() {

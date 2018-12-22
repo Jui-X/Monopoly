@@ -27,13 +27,25 @@ public class BankController {
     }
 
     public boolean buildHouse(){
-        bank.setHouseNum(bank.getHouseNum()-1);
+        // 银行房产数 - 1
+        bank.setHouseNum(bank.getHouseNum() - 1);
         return true;
     }
 
     public boolean buildHotel(){
-        bank.setHotelNum(bank.getHotelNum()-1);
+        // 银行旅馆数 - 1
+        bank.setHotelNum(bank.getHotelNum() - 1);
         return true;
+    }
+
+    public void cashoutHouse(){
+        // 银行房产数 + 1
+        bank.setHouseNum(bank.getHotelNum() + 1);
+    }
+
+    public void cashoutHotel(){
+        // 银行旅馆数 + 1
+        bank.setHotelNum(bank.getHotelNum() + 1);
     }
 
     public void acution(){

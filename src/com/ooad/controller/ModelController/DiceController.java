@@ -22,10 +22,12 @@ public class DiceController {
     }
 
     public int getFaceValue(){
+        // 得到色子点数
         faceValue = (int) Math.random() * 6;
         return faceValue;
     }
 
+    // 掷色
     public void roll(){
         dice.setPoint(getFaceValue());
     }
