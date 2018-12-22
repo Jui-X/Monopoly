@@ -132,7 +132,7 @@ public class Player {
     }
 
     public Player(){
-        this.cash = 15000000;
+        this.cash = 15000;
         this.houses = null;
         this.hotels = null;
     }

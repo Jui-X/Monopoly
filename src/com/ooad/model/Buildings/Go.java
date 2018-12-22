@@ -13,7 +13,7 @@ public class Go extends Building{
     /*
      * 经过起点奖励金
      */
-    private static final int rewardMoney = 2000;
+    private static final int rewardMoney = 200;
     private PlayerController playerController;
 
     public Go(PlayerController playerController){

@@ -41,7 +41,7 @@ public class MoveCotroller {
     }
 
     public void landOn(Piece nowPiece, PieceController pieceController){
-        if(nowPiece.isPurchasability()){
+        if(nowPiece.getState() == 0){
             // 询问玩家是否要购买地皮
             if(playerController.purchasePiece()) {
 
@@ -53,10 +53,11 @@ public class MoveCotroller {
         }
         else {
             // 向路过玩家收税
-            playerController.payRent(pieceController.getRent());
-            Player owner = nowPiece.getOwner();
-            PlayerController ownerController = new PlayerController(owner);
-            ownerController.collectRent(pieceController.getRent());
+            if (playerController.payRent(pieceController.getRent())) {
+                Player owner = nowPiece.getOwner();
+                PlayerController ownerController = new PlayerController(owner);
+                ownerController.collectRent(pieceController.getRent());
+            }
         }
     }
 

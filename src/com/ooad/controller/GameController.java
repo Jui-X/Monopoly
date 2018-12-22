@@ -35,9 +35,11 @@ public class GameController {
     private HouseController houseController = null;
     private Hotel hotel = null;
     private HotelController hotelController = null;
+    private CashController cashController = null;
 
-    public GameController(Player player){
+    public GameController(Player player, Bank bank){
         this.player = player;
+        this.bank = bank;
     }
 
     public int startNewRound(){
@@ -51,6 +53,7 @@ public class GameController {
         diceController1.roll();
         diceController2.roll();
         otherDiceController.roll();
+
         playerController = new PlayerController(player, dice1, dice2, otherDice);
         // 获得前进步数
         int step = playerController.rollDice();
@@ -59,46 +62,121 @@ public class GameController {
 
     public void moveOn(){
         moveCotroller = new MoveCotroller(player, playerController, pieceList);
+        // 开始一个新的回合
         Piece nowPiece = moveCotroller.moveOn(startNewRound());
+        // 到达新位置以后的状态
         moveCotroller.landOn(nowPiece, pieceController);
     }
 
     public void purchasePiece(Piece piece){
         playerController = new PlayerController(player, piece);
-        // 玩家进行买房操作
-        playerController.purchasePiece();
         pieceController = new PieceController(piece, player);
-        // 房屋被卖
-        pieceController.isPurchased();
+        // 玩家进行买房操作
+        if (playerController.purchasePiece()) {
+            // 地皮被卖
+            pieceController.isPurchased();
+        }
+        else {
+            if (playerController.bankrupt()) {
+                cashOutOrSell(piece.getPrice());
+            }
+        }
     }
 
     public void buildHouse(Piece piece, Bank bank){
         house = new House(piece);
-        house.setOwner(player);
+        houseController = new HouseController(house, player, piece);
         playerController = new PlayerController(player, house);
-        // 玩家建房
-        playerController.buildHouse();
         pieceController = new PieceController(piece, house);
-        // 地皮上建房
-        pieceController.houseBuilt();
         bankController = new BankController(bank);
-        // 银行建房操作
-        bankController.buildHouse();
+        // 玩家建房
+        if (playerController.buildHouse()) {
+            // 房屋拥有者变更为玩家
+            houseController.houseOwner();
+            // 房屋与地皮相关联
+            houseController.pieceOfHouse();
+            // 地皮上建房
+            pieceController.houseBuilt();
+            // 银行建房操作
+            bankController.buildHouse();
+        }
+        else {
+            if (playerController.bankrupt()) {
+                cashOutOrSell(house.getPrice());
+            }
+        }
     }
 
     public void buildHotel(Piece piece, Bank bank){
         hotel = new Hotel(piece);
-        HotelController hotelController = new HotelController(hotel, player);
-        hotelController.hotelOwner();
+        hotelController = new HotelController(hotel, player);
         playerController = new PlayerController(player, hotel);
-        // 玩家建旅馆
-        playerController.buildHotel();
         pieceController = new PieceController(piece, hotel);
-        // 地皮上建旅馆
-        pieceController.hotelBuilt();
         bankController = new BankController(bank);
-        // 银行建旅馆操作
-        bankController.buildHotel();
+        // 玩家建旅馆
+        if (playerController.buildHotel()) {
+            // 旅馆拥有者变更为玩家
+            hotelController.hotelOwner();
+            // 旅馆与地皮相关联
+            hotelController.pieceOfHotel();
+            // 地皮上建旅馆
+            pieceController.hotelBuilt();
+            // 银行建旅馆操作
+            bankController.buildHotel();
+        }
+        else {
+            if (playerController.bankrupt()) {
+                cashOutOrSell(hotel.getPrice());
+            }
+        }
+    }
+
+    public void cashOut(Piece piece){
+        playerController = new PlayerController(player);
+        pieceController = new PieceController(piece, bank);
+        cashController = new CashController(playerController, pieceController);
+        // 地皮套现操作
+        cashController.cashOutPiece();
+    }
+
+    public void soldHouse(House house){
+        playerController = new PlayerController(player);
+        bankController = new BankController(bank);
+        houseController = new HouseController(house, bank);
+        cashController = new CashController(playerController, bankController, houseController);
+        // 卖房套现
+        cashController.soldHouse();
+    }
+
+    public void soldHotel(Hotel hotel){
+        playerController = new PlayerController(player);
+        bankController = new BankController(bank);
+        hotelController = new HotelController(hotel, bank);
+        cashController = new CashController(playerController, bankController, hotelController);
+        // 卖旅馆套现
+        cashController.soldHotel();
+    }
+
+    public void cashOutOrSell(int price){
+        if (player.getHotels() != null) {
+            for (Hotel h: player.getHotels()) {
+                this.soldHotel(h);
+                if (player.getCash() >= price) return;
+            }
+        }
+        else if (player.getHouses() != null) {
+            for (House h: player.getHouses()) {
+                this.soldHouse(h);
+                if (player.getCash() >= price) return;
+            }
+        }
+        else if (player.getPieces() != null) {
+            for (Piece p: player.getPieces()) {
+                this.cashOut(p);
+                if (player.getCash() >= price) return;
+            }
+        }
+
     }
 
 }

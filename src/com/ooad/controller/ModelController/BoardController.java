@@ -1,7 +1,6 @@
 package com.ooad.controller.ModelController;
 
 import com.ooad.model.Board;
-import com.ooad.model.Piece;
 import com.ooad.model.Square;
 
 import java.util.List;

@@ -30,9 +30,9 @@ public class GamePanel extends JPanel {
     public void initUI(){
 
         // 实例化背景
-        this.boardView = new BoardView();
+//        this.boardView = new BoardView();
         // 实例化方格
-        this.squareView = new SquareView();
+//        this.squareView = new SquareView();
     }
 
 }

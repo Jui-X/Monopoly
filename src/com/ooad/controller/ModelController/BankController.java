@@ -1,6 +1,8 @@
 package com.ooad.controller.ModelController;
 
+import com.ooad.Context.GameState;
 import com.ooad.model.Bank;
+import com.ooad.Context.GameState;
 
 /**
  * @param: none
@@ -9,16 +11,6 @@ import com.ooad.model.Bank;
  * @create: 2018-12-19 20:53
  **/
 public class BankController {
-
-    /*
-     * 最大房屋数量
-     */
-    private static final int MAX_HOUSE = 32;
-
-    /*
-     * 最大旅馆数量
-     */
-    private static final int MAX_HOTEL = 12;
 
     private Bank bank;
 
@@ -32,10 +24,10 @@ public class BankController {
         return true;
     }
 
-    public boolean buildHotel(){
+    public void buildHotel(){
         // 银行旅馆数 - 1
         bank.setHotelNum(bank.getHotelNum() - 1);
-        return true;
+        bank.setHouseNum(bank.getHouseNum() + GameState.MAX_HOUSE);
     }
 
     public void cashoutHouse(){

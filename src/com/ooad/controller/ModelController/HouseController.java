@@ -1,7 +1,7 @@
 package com.ooad.controller.ModelController;
 
-import com.ooad.model.Bank;
 import com.ooad.model.Buildings.House;
+import com.ooad.model.Piece;
 import com.ooad.model.Player;
 
 /**
@@ -17,14 +17,25 @@ public class HouseController {
 
     private House house;
     private Player player;
+    private Piece piece;
 
-    public HouseController(House house, Player player){
+    public HouseController(House house, Player player) {
         this.house = house;
         this.player = player;
     }
 
+    public HouseController(House house, Player player, Piece piece){
+        this.house = house;
+        this.player = player;
+        this.piece = piece;
+    }
+
     public void houseOwner(){
         house.setOwner(player);
+    }
+
+    public void pieceOfHouse(){
+        house.setPiece(piece);
     }
 
 }

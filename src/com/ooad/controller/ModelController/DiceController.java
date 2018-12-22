@@ -1,9 +1,7 @@
 package com.ooad.controller.ModelController;
 
 import com.ooad.model.Dice;
-import com.ooad.model.Player;
 
-import java.util.List;
 
 /**
  * @param: none

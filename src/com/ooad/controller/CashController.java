@@ -37,15 +37,17 @@ public class CashController {
     public void cashOutPiece(){
         // 地皮拥有者变更为Bank
         pieceController.pieceOwner();
+        // 地皮状态变更为已抵押
+        pieceController.isPledged();
         // 玩家抵押地皮套现操作
-        playerController.cashOutPiece();
+        playerController.sellPiece();
     }
 
     public void soldHouse(){
         // 房产拥有者变为Bank
         houseController.houseOwner();
         // 玩家卖掉房产获得现金操作
-        playerController.cashOutHouse();
+        playerController.sellHouse();
         // 银行获得房产操作
         bankController.cashoutHouse();
     }
@@ -54,7 +56,7 @@ public class CashController {
         // 房产拥有者变为Bank
         hotelController.hotelOwner();
         // 玩家卖掉旅馆获得现金操作
-        playerController.cashOutHotel();
+        playerController.sellHotel();
         // 银行获得旅馆操作
         bankController.cashoutHotel();
     }

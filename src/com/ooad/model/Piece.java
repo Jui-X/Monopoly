@@ -2,8 +2,10 @@ package com.ooad.model;
 
 
 import com.ooad.model.Buildings.Building;
+import com.ooad.model.Buildings.Hotel;
+import com.ooad.model.Buildings.House;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * @param: none
@@ -29,11 +31,6 @@ public class Piece{
     private int color;
 
     /*
-     * 可购买性
-     */
-    protected boolean purchasability;
-
-    /*
      * 价格
      */
     protected int price;
@@ -49,9 +46,14 @@ public class Piece{
     protected Player owner;
 
     /*
-     * 建筑列表
+     * 房产列表
      */
-    protected List<Building> building;
+    protected ArrayList<House> houses;
+
+    /*
+     * 旅馆列表
+     */
+    protected Hotel hotel;
 
     /*
      * 所属方格
@@ -82,14 +84,6 @@ public class Piece{
         this.color = color;
     }
 
-    public boolean isPurchasability() {
-        return purchasability;
-    }
-
-    public void setPurchasability(boolean purchasability) {
-        this.purchasability = purchasability;
-    }
-
     public int getPrice() {
         return price;
     }
@@ -114,12 +108,20 @@ public class Piece{
         this.owner = owner;
     }
 
-    public List<Building> getBuilding() {
-        return building;
+    public ArrayList<House> getHouses() {
+        return houses;
     }
 
-    public void setBuilding(List<Building> building) {
-        this.building = building;
+    public void setHouses(ArrayList<House> houses) {
+        this.houses = houses;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
     public Square getSquare() {
@@ -134,10 +136,10 @@ public class Piece{
         this.houseNum = 0;
         this.hotelNum = 0;
         this.color = 0;
-        this.price = 10000;
-        this.purchasability = true;
+        this.price = 1000;
         this.owner = null;
-        this.building = null;
+        this.houses = null;
+        this.hotel = null;
         this.square = square;
     }
 }

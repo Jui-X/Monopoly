@@ -1,9 +1,13 @@
 package com.ooad.controller.ModelController;
 
+import com.ooad.Context.GameState;
 import com.ooad.model.Buildings.Hotel;
 import com.ooad.model.Buildings.House;
 import com.ooad.model.Piece;
 import com.ooad.model.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @param: none
@@ -12,13 +16,6 @@ import com.ooad.model.Player;
  * @create: 2018-12-19 20:54
  **/
 public class PieceController {
-
-    private static final int MAX_HOUSENUM = 4;
-    private static final int MAX_HOTELNUM = 1;
-    private static final int ORANGE_PIECE = 1;
-    private static final int PURPLE_PIECE = 2;
-    private static final int NORAMAL = 1;
-    private static final int PLEDGED = 0;
 
     private Piece piece;
     private Player player;
@@ -47,42 +44,48 @@ public class PieceController {
 
     public boolean isPurchased(){
         // 将地皮可购买性设置为false
-        if(piece.isPurchasability()){
-            piece.setPurchasability(false);
+        if(piece.getState() == GameState.OWNERLESS){
+            piece.setState(GameState.SOLD);
             return true;
         }
         return false;
     }
 
     public void isPledged(){
-        if(piece.getState() == NORAMAL){
-            piece.setState(PLEDGED);
+        if(piece.getState() == GameState.SOLD){
+            piece.setState(GameState.PLEDGED);
         }
     }
 
     public void isRedeemed(){
-        if (piece.getState() == PLEDGED){
-            piece.setState(NORAMAL);
+        if (piece.getState() == GameState.PLEDGED){
+            piece.setState(GameState.SOLD);
         }
     }
 
     public void houseBuilt(){
-        // 地皮上的房产数量增加
-        piece.setHouseNum(piece.getHouseNum()+1);
-        // 地皮房产列表新增房产
-        piece.getBuilding().add(house);
+       if (piece.getHouseNum() < GameState.MAX_HOUSENUM){
+           // 地皮上的房产数量增加
+           piece.setHouseNum(piece.getHouseNum() + 1);
+           // 地皮新增房产
+           piece.getHouses().add(house);
+       }
     }
 
     public void hotelBuilt(){
-        // 地皮上的旅馆数量增加
-        piece.setHotelNum(piece.getHotelNum()+1);
-        // 地皮房产旅馆新增旅馆
-        piece.getBuilding().add(hotel);
+        if (piece.getHotelNum() < GameState.MAX_HOTELNUM){
+            // 地皮上的旅馆数量增加
+            piece.setHotelNum(piece.getHotelNum() + 1);
+            // 地皮新增旅馆
+            piece.setHotel(hotel);
+            //
+            piece.getHouses().removeAll(piece.getHouses());
+        }
     }
 
     public int getRent(){
         // 计算总租金
-        if (piece.getState() == NORAMAL){
+        if (piece.getState() == GameState.SOLD){
             double rent = piece.getHouseNum() * house.getPrice() * 0.1 +
                     piece.getHotelNum() * hotel.getPrice() * 0.05;
             return (int)rent;
