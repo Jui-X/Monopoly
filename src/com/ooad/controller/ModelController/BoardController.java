@@ -1,7 +1,7 @@
 package com.ooad.controller.ModelController;
 
 import com.ooad.model.Board;
-import com.ooad.model.Square;
+import com.ooad.model.Piece;
 
 import java.util.List;
 
@@ -14,13 +14,13 @@ import java.util.List;
 public class BoardController {
 
     private Board board;
-    private List<Square> squareList = null;
+    private List<Piece> pieceList = null;
 
     public BoardController(Board board){
         this.board = board;
         // 初始化所有方格
         for (int i = 0; i < board.getSquareNum(); i++){
-            this.squareList.add(new Square());
+            this.pieceList.add(new Piece());
         }
     }
 

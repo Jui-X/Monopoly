@@ -15,50 +15,60 @@ import java.util.ArrayList;
  **/
 public class Piece{
 
-    /*
+    /**
      * 房屋数
      */
     private int houseNum;
 
-    /*
+    /**
      * 旅馆数
-     */
+     **/
     private int hotelNum;
 
-    /*
+    /**
      * 颜色
-     */
+     **/
     private int color;
 
-    /*
+    /**
      * 价格
-     */
+     **/
     protected int price;
 
-    /*
+    /**
      * 状态
-     */
+     **/
     protected int state;
 
-    /*
+    /**
      * 建筑拥有者姓名
-     */
+     **/
     protected Player owner;
 
-    /*
+    /**
      * 房产列表
-     */
+     **/
     protected ArrayList<House> houses;
 
-    /*
+    /**
      * 旅馆列表
-     */
+     **/
     protected Hotel hotel;
 
+    /**
+     * 方格X坐标
+     **/
+    private int X;
+
+    /**
+     * 方格Y坐标
+     **/
+    private int Y;
+
     /*
-     * 所属方格
+     * 下一块方格
      */
-    protected Square square = null;
+    private Piece nextPiece;
 
     public int getHouseNum() {
         return houseNum;
@@ -124,15 +134,31 @@ public class Piece{
         this.hotel = hotel;
     }
 
-    public Square getSquare() {
-        return square;
+    public int getX() {
+        return X;
     }
 
-    public void setSquare(Square square) {
-        this.square = square;
+    public void setX(int x) {
+        X = x;
     }
 
-    public Piece(Square square){
+    public int getY() {
+        return Y;
+    }
+
+    public void setY(int y) {
+        Y = y;
+    }
+
+    public Piece getNextPiece() {
+        return nextPiece;
+    }
+
+    public void setNextPiece(Piece nextPiece) {
+        this.nextPiece = nextPiece;
+    }
+
+    public Piece(){
         this.houseNum = 0;
         this.hotelNum = 0;
         this.color = 0;
@@ -140,6 +166,5 @@ public class Piece{
         this.owner = null;
         this.houses = null;
         this.hotel = null;
-        this.square = square;
     }
 }

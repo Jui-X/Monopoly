@@ -8,8 +8,14 @@ package com.ooad.Context;
  **/
 public class GameState {
 
+    /**
+     * 一块地皮上最大房屋数量
+     **/
     public static final int MAX_HOUSENUM = 4;
 
+    /**
+     * 一块地皮上最大旅馆数量
+     **/
     public static final int MAX_HOTELNUM = 1;
 
     public static final int ORANGE_PIECE = 1;
@@ -21,7 +27,7 @@ public class GameState {
      * OWNERLESS： 未售出的
      * SOLD： 已售出的
      * PLEDGED： 已抵押的
-     */
+     **/
     public static final int OWNERLESS = 0;
     public static final int SOLD = 1;
     public static final int PLEDGED = 2;
@@ -32,24 +38,54 @@ public class GameState {
      * 进入监狱状态：1
      * 破产：2
      *
-     */
+     **/
     public static final int NOMARL = 0;
     public static final int IN_JAIL = 1;
     public static final int BANKRUPTCY = 2;
 
-    /*
+    /**
      * 最大房屋数量
-     */
+     **/
     public static final int MAX_HOUSE = 32;
 
-    /*
+    /**
      * 最大旅馆数量
-     */
+     **/
     public static final int MAX_HOTEL = 12;
 
-    /*
+    /**
      * 最大旅馆数量
-     */
+     **/
     public static final int FINE = 50;
+
+    /**
+     * 骰子运行状态
+     **/
+    public static final int DICE_RUNNING = 1;
+
+    /**
+     * 骰子停止状态
+     **/
+    public static final int DICE_STOP = 2;
+
+    /**
+     * 玩家掷点状态
+     **/
+    public static int STATE_THROWDICE = 1;
+
+    /**
+     * 玩家移动状态
+     */
+    public static int STATE_MOVE = 2;
+
+    /**
+     * 游戏终止状态
+     */
+    public static int GAME_STOP = 3;
+
+    /**
+     * 玩家初始金钱
+     */
+    public static int PLAYER_ORIGIN_CASH = 15000;
 
 }

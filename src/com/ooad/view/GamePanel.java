@@ -11,11 +11,22 @@ import java.awt.*;
  **/
 public class GamePanel extends JPanel {
 
+    private GameFrame gameFrame = null;
+    private JLayeredPane layeredPane;
+
     //游戏背景
     private BoardView boardView = null;
     private SquareView squareView = null;
     private DiceView diceView = null;
     private PlayerView playerView = null;
+
+    public JLayeredPane getLayeredPane() {
+        return layeredPane;
+    }
+
+    public void setLayeredPane(JLayeredPane layeredPane) {
+        this.layeredPane = layeredPane;
+    }
 
     public GamePanel(){
         //采用BorderLayout布局

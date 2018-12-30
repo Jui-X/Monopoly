@@ -11,32 +11,32 @@ import com.ooad.model.Player;
  **/
 public class Building {
 
-    /*
+    /**
      * 建筑名字
      */
     protected String name = null;
 
-    /*
+    /**
      * 税率
      */
     protected int revenue;
 
-    /*
+    /**
      * 建筑价格
      */
     protected int price;
 
-    /*
+    /**
      * 状态
      */
     protected int state;
 
-    /*
+    /**
      * 所属地皮
      */
     protected Piece piece;
 
-    /*
+    /**
      * 所属玩家
      */
     protected Player owner;

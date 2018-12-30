@@ -1,5 +1,7 @@
 package com.ooad.model;
 
+import com.ooad.Context.GameState;
+
 /**
  * @param: none
  * @description: 银行Model
@@ -8,12 +10,12 @@ package com.ooad.model;
  **/
 public class Bank extends Player{
 
-    /*
+    /**
      * 房屋数量
      */
     private int houseNum;
 
-    /*
+    /**
      * 旅馆数量
      */
     private int hotelNum;
@@ -35,8 +37,8 @@ public class Bank extends Player{
     }
 
     public Bank(){
-        this.houseNum = 32;
-        this.hotelNum = 12;
+        this.houseNum = GameState.MAX_HOUSE;
+        this.hotelNum = GameState.MAX_HOTEL;
     }
 
 }
