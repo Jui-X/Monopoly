@@ -1,4 +1,4 @@
-package com.ooad.model.Buildings;
+package com.ooad.model.Building;
 
 import com.ooad.model.Piece;
 

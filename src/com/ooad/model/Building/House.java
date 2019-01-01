@@ -1,4 +1,4 @@
-package com.ooad.model.Buildings;
+package com.ooad.model.Building;
 
 import com.ooad.model.Piece;
 
@@ -10,8 +10,7 @@ import com.ooad.model.Piece;
  **/
 public class House extends Building{
 
-    public House(Piece piece){
-        this.price = 500;
-        this.piece = piece;
+    public House(int posX, int posY){
+        super(posX, posY);
     }
 }

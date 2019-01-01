@@ -1,11 +1,14 @@
 package com.ooad.model;
 
 
-import com.ooad.model.Buildings.Building;
-import com.ooad.model.Buildings.Hotel;
-import com.ooad.model.Buildings.House;
+import com.ooad.model.Building.Hotel;
+import com.ooad.model.Building.House;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
+
+import static com.ooad.Context.GameState.*;
 
 /**
  * @param: none
@@ -13,7 +16,7 @@ import java.util.ArrayList;
  * @author: KingJ
  * @create: 2018-12-19 20:31
  **/
-public class Piece{
+public class Piece extends Tick implements Port {
 
     /**
      * 房屋数
@@ -65,10 +68,21 @@ public class Piece{
      **/
     private int Y;
 
-    /*
+    /**
      * 下一块方格
-     */
+     **/
     private Piece nextPiece;
+
+    /**
+     * 土地图片
+     **/
+    private Image pieceIMG;
+
+    /**
+     * 监狱信息
+     */
+    public static Point prison = new Point(0, 0);
+
 
     public int getHouseNum() {
         return houseNum;
@@ -158,6 +172,15 @@ public class Piece{
         this.nextPiece = nextPiece;
     }
 
+    public Image getPieceIMG() {
+        return pieceIMG;
+    }
+
+    public void setPieceIMG(Image pieceIMG) {
+        this.pieceIMG = pieceIMG;
+    }
+
+
     public Piece(){
         this.houseNum = 0;
         this.hotelNum = 0;
@@ -166,5 +189,32 @@ public class Piece{
         this.owner = null;
         this.houses = null;
         this.hotel = null;
+        this.pieceIMG =  new ImageIcon("img/background/land.jpg").getImage();
+    }
+
+    protected int[][] land= {
+            // 模仿大富翁其中一个地图设置
+            { ORIGIN, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, PRISON },
+            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
+            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
+            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
+            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
+            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
+            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
+            { PRISON, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE,SPACE, SPACE, SPACE, SPACE, SPACE }};
+
+    public int[][] getLand() {
+        return land;
+    }
+
+    /**
+     * 开始游戏设置
+     */
+    @Override
+    public void startGameInit() { }
+
+    @Override
+    public void updateData(long tick) {
+        this.nowTick = tick;
     }
 }

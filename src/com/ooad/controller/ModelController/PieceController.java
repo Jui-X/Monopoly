@@ -1,13 +1,10 @@
 package com.ooad.controller.ModelController;
 
 import com.ooad.Context.GameState;
-import com.ooad.model.Buildings.Hotel;
-import com.ooad.model.Buildings.House;
+import com.ooad.model.Building.Hotel;
+import com.ooad.model.Building.House;
 import com.ooad.model.Piece;
 import com.ooad.model.Player;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @param: none

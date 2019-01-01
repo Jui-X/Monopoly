@@ -1,6 +1,7 @@
 package com.ooad.model;
 
 import com.ooad.Context.GameState;
+import com.ooad.controller.Monopoly;
 
 /**
  * @param: none

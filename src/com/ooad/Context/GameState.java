@@ -88,4 +88,42 @@ public class GameState {
      */
     public static int PLAYER_ORIGIN_CASH = 15000;
 
+    /**
+     * 无建筑
+     */
+    public final static int NULL_SET = 0;
+
+    /**
+     * 空地
+     */
+    public final static int SPACE = 1;
+
+    /**
+     * 起点
+     */
+    public final static int ORIGIN = 10;
+
+    /**
+     * 监狱
+     */
+    public final static int PRISON = 11;
+
+    /**
+     * 停留在建筑返回状态
+     */
+    public  final static int HUOSE_EVENT = 1;
+
+
+    public  final static int ORIGIN_EVENT = 2;
+
+
+    public  final static int PRISON_EVENT = 3;
+
+    /**
+     * 路过建筑返回状态
+     */
+
+    public final static int ORIGIN_PASS_EVENT = 1;
+
+
 }

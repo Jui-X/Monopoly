@@ -1,7 +1,9 @@
-package com.ooad.model.Buildings;
+package com.ooad.model.Building;
 
 import com.ooad.model.Piece;
 import com.ooad.model.Player;
+
+import java.util.List;
 
 /**
  * @param: none
@@ -37,9 +39,26 @@ public class Building {
     protected Piece piece;
 
     /**
+     * 坐标
+     */
+    protected int posX;
+    protected int posY;
+
+    /**
      * 所属玩家
      */
     protected Player owner;
+
+    /**
+     * 可购买性
+     */
+    protected boolean purchasability = false;
+
+    /**
+     * 当前房屋等级
+     */
+    protected int level;
+
 
     public String getName() {
         return name;
@@ -81,6 +100,14 @@ public class Building {
         this.piece = piece;
     }
 
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
     public Player getOwner() {
         return owner;
     }
@@ -88,4 +115,35 @@ public class Building {
     public void setOwner(Player owner) {
         this.owner = owner;
     }
+
+    public boolean isPurchasability() {
+        return purchasability;
+    }
+
+    public void setPurchasability(boolean purchasability) {
+        this.purchasability = purchasability;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+
+    public Building(int posX, int posY) {
+        this.posX = posX;
+        this.posY = posY;
+    }
+
+    /**
+     * 触发事件
+     */
+    public int getEvent() { return 0;}
+    /**
+     * 路过事件
+     */
+    public int passEvent() { return 0;}
 }

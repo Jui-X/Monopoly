@@ -2,8 +2,9 @@ package com.ooad.model;
 
 import com.ooad.Context.GameState;
 import com.ooad.controller.Monopoly;
-import com.ooad.model.Buildings.Hotel;
-import com.ooad.model.Buildings.House;
+import com.ooad.controller.MoveCotroller;
+import com.ooad.model.Building.Hotel;
+import com.ooad.model.Building.House;
 
 import javax.swing.*;
 import java.awt.*;
@@ -88,6 +89,10 @@ public class Player extends Tick implements Port {
      */
     private Monopoly game = null;
 
+    /**
+     * 移动控制器
+     */
+    private MoveCotroller move = null;
 
 
     public String getName() {
@@ -162,6 +167,10 @@ public class Player extends Tick implements Port {
         this.hotels = hotels;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     public int getRole() {
         return role;
     }
@@ -178,9 +187,12 @@ public class Player extends Tick implements Port {
         this.otherPlayer = otherPlayer;
     }
 
-    public Player(int number, Monopoly game){
+    public Player() { }
+
+    public Player(Monopoly game, int number, MoveCotroller move){
         this.game = game;
         this.number = number;
+        this.move = move;
         this.houses = null;
         this.hotels = null;
     }
@@ -250,6 +262,18 @@ public class Player extends Tick implements Port {
 
     @Override
     public void updateData(long tick) {
-
+        this.nowTick = tick;
+        // 移动玩家
+        if (this.startTick < this.nowTick && this.nextTick >= this.nowTick) {
+            move.moveOn();
+            // 路过建筑
+            if (this.nextTick != this.nowTick) {
+                game.prassBuilding();
+            }
+            // 玩家移动完毕，停下操作
+            if (this.nextTick == this.nowTick) {
+                game.playerStopJudge();
+            }
+        }
     }
 }

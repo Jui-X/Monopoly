@@ -2,8 +2,8 @@ package com.ooad.controller;
 
 import com.ooad.controller.ModelController.*;
 import com.ooad.model.Bank;
-import com.ooad.model.Buildings.Hotel;
-import com.ooad.model.Buildings.House;
+import com.ooad.model.Building.Hotel;
+import com.ooad.model.Building.House;
 import com.ooad.model.Dice;
 import com.ooad.model.Piece;
 import com.ooad.model.Player;
@@ -84,7 +84,9 @@ public class GameController {
     }
 
     public void buildHouse(Piece piece, Bank bank){
-        house = new House(piece);
+        int X = player.getX();
+        int Y = player.getY();
+        house = new House(X, Y);
         houseController = new HouseController(house, player, piece);
         playerController = new PlayerController(player, house);
         pieceController = new PieceController(piece, house);

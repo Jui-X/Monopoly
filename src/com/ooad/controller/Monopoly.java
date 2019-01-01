@@ -2,6 +2,8 @@ package com.ooad.controller;
 
 import com.ooad.Context.GameState;
 import com.ooad.model.*;
+import com.ooad.model.Building.Building;
+import com.ooad.model.Building.Go;
 import com.ooad.view.GamePanel;
 
 import java.util.ArrayList;
@@ -44,6 +46,7 @@ public class Monopoly {
     private Piece piece = null;
     private Dice dice = null;
     private TextTip textTip = null;
+    private Buildings buildings;
     private static Bank bank;
 
     /**
@@ -120,9 +123,7 @@ public class Monopoly {
 
     /**
      *
-     *
      * 按下骰子
-     *
      *
      */
     public void pressButton() {
@@ -222,9 +223,47 @@ public class Monopoly {
     }
 
     /**
+     * 玩家中途路过建筑
+     */
+    public void prassBuilding() {
+        // 该地点房屋
+        Building building = buildings.getBuilding(player.getY() / 60,
+                player.getX() / 60);
+        if (building != null && player.getX() % 60 == 0
+                && player.getY() % 60 == 0) {
+            // 经过房屋发生事件
+            int event = building.passEvent();
+            // 进入经过房屋事件处理
+            disposePassEvent(building, event, player);
+        }
+    }
+
+    /**
+     * 经过房屋事件处理
+     */
+    private void disposePassEvent(Building b, int event, Player player) {
+        switch (event) {
+            case GameState.ORIGIN_PASS_EVENT:
+                // 中途经过原点
+                passOrigin(b, player);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 中途经过原点
+     */
+    private void passOrigin(Building b, Player player) {
+        this.textTip.showTextTip(player, player.getName() + " 路过原点，奖励 "
+                + ((Go) b).getPassReward() + "金币.", 3);
+        player.setCash(player.getCash() + ((Go) b).getPassReward());
+    }
+
+    /**
      *
      * 游戏结束~
-     *
      *
      * @param:winer
      */

@@ -1,5 +1,7 @@
 package com.ooad.view;
 
+import com.ooad.model.Piece;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,7 +18,7 @@ public class GamePanel extends JPanel {
 
     //游戏背景
     private BoardView boardView = null;
-    private SquareView squareView = null;
+    private PieceView pieceView = null;
     private DiceView diceView = null;
     private PlayerView playerView = null;
 
@@ -42,8 +44,6 @@ public class GamePanel extends JPanel {
 
         // 实例化背景
 //        this.boardView = new BoardView();
-        // 实例化方格
-//        this.squareView = new SquareView();
     }
 
 }

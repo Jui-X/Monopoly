@@ -42,7 +42,9 @@ public class TextTip extends Tick implements Port {
         this.setNextTick(this.nowTick + time * Monopoly.rate);
     }
 
+    @Override
     public void updateData(long tick) {this.nowTick = tick;}
 
+    @Override
     public void startGameInit() {}
 }

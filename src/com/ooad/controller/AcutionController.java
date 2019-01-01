@@ -2,7 +2,7 @@ package com.ooad.controller;
 
 import com.ooad.controller.ModelController.PlayerController;
 import com.ooad.model.Bank;
-import com.ooad.model.Buildings.House;
+import com.ooad.model.Building.House;
 import com.ooad.model.Piece;
 
 import java.util.List;
