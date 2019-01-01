@@ -51,7 +51,7 @@ public class Piece extends Tick implements Port {
     /**
      * 房产列表
      **/
-    protected ArrayList<House> houses;
+    protected House houses;
 
     /**
      * 旅馆列表
@@ -132,11 +132,11 @@ public class Piece extends Tick implements Port {
         this.owner = owner;
     }
 
-    public ArrayList<House> getHouses() {
+    public House getHouses() {
         return houses;
     }
 
-    public void setHouses(ArrayList<House> houses) {
+    public void setHouses(House houses) {
         this.houses = houses;
     }
 

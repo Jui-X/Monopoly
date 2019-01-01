@@ -4,6 +4,7 @@ import com.ooad.Context.GameState;
 import com.ooad.model.*;
 import com.ooad.model.Building.Building;
 import com.ooad.model.Building.Go;
+import com.ooad.model.Building.Jail;
 import com.ooad.view.GamePanel;
 
 import java.util.ArrayList;
@@ -47,12 +48,13 @@ public class Monopoly {
     private Dice dice = null;
     private TextTip textTip = null;
     private Buildings buildings;
-    private static Bank bank;
+    private static Bank bank = new Bank();
 
     /**
      * 骰子当前点数
      */
     private int point;
+
     /**
      * 游戏计时器
      */
@@ -227,14 +229,14 @@ public class Monopoly {
      */
     public void prassBuilding() {
         // 该地点房屋
-        Building building = buildings.getBuilding(player.getY() / 60,
-                player.getX() / 60);
-        if (building != null && player.getX() % 60 == 0
-                && player.getY() % 60 == 0) {
+        Building building = buildings.getBuilding(nowPlayer.getY() / 60,
+                nowPlayer.getX() / 60);
+        if (building != null && nowPlayer.getX() % 60 == 0
+                && nowPlayer.getY() % 60 == 0) {
             // 经过房屋发生事件
             int event = building.passEvent();
             // 进入经过房屋事件处理
-            disposePassEvent(building, event, player);
+            disposePassEvent(building, event, nowPlayer);
         }
     }
 
@@ -259,6 +261,76 @@ public class Monopoly {
         this.textTip.showTextTip(player, player.getName() + " 路过原点，奖励 "
                 + ((Go) b).getPassReward() + "金币.", 3);
         player.setCash(player.getCash() + ((Go) b).getPassReward());
+    }
+
+    /**
+     *
+     * 玩家移动完毕，停下判断
+     *
+     */
+    public void palyerLand() {
+        // 当前玩家
+        Player nowPlayer = this.getNowPlayer();
+        if (nowPlayer.getInJail() > 0) {
+            this.textTip.showTextTip(nowPlayer, nowPlayer.getName() + "当前在监狱,不能移动.",
+                    2);
+            // 更换玩家状态
+            this.nextState();
+        } else {
+            // 进行玩家操作（买房 事件等）
+            running.landOn();
+        }
+    }
+
+    /**
+     *
+     *
+     * 停留在可操作土地
+     *
+     *
+     */
+    public void stopInHouse(Building b, Player player) {
+        if (b.isPurchasability()) {// 玩家房屋
+            if (b.getOwner() == null) { // 无人房屋
+                // 执行买房操作
+                running.purchasePiece(b, bank);
+            } else {// 有人房屋
+                if (b.getOwner().equals(player)) {// 自己房屋
+                    // 执行升级房屋操作
+                    running.buildHouse(b, bank);
+                } else {// 别人房屋
+                    // 执行交税操作
+                    running.(b, player);
+                }
+            }
+        }
+    }
+
+    /**
+     *
+     * 停留在原点
+     *
+     */
+    public void stopInOrigin(Building b, Player player) {
+        this.textTip.showTextTip(player, player.getName() + " 在起点停留，奖励 "
+                + ((Go) b).getReward() + "金币.", 3);
+        player.setCash(player.getCash() + ((Go) b).getReward());
+        new Thread(new MyThread(run, 1)).start();
+    }
+
+    /**
+     *
+     * 停留在监狱
+     *
+     */
+    public void stopInPrison(Building b, Player player) {
+        int days = (int) (Math.random() * 3) + 2;
+        player.setInJail(days);
+        int random = (int) (Math.random() * ((Jail) b).getEvents().length);
+        String text = ((Jail) b).getEvents()[random];
+        this.textTip.showTextTip(player, player.getName() + text + "停留"
+                + (days - 1) + "天.", 3);
+        new Thread(new MyThread(run, 1)).start();
     }
 
     /**

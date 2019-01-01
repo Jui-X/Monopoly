@@ -1,12 +1,10 @@
 package com.ooad.controller;
 
 import com.ooad.controller.ModelController.*;
-import com.ooad.model.Bank;
+import com.ooad.model.*;
+import com.ooad.model.Building.Building;
 import com.ooad.model.Building.Hotel;
 import com.ooad.model.Building.House;
-import com.ooad.model.Dice;
-import com.ooad.model.Piece;
-import com.ooad.model.Player;
 
 import java.util.List;
 
@@ -31,6 +29,7 @@ public class GameController {
     private PlayerController playerController = null;
     private MoveCotroller moveCotroller = null;
     private PieceController pieceController = null;
+    private Buildings buildings = null;
     private House house = null;
     private HouseController houseController = null;
     private Hotel hotel = null;
@@ -62,10 +61,20 @@ public class GameController {
 
     public void moveOn(){
         moveCotroller = new MoveCotroller(player, playerController, pieceList);
-        // 开始一个新的回合
-        Piece nowPiece = moveCotroller.moveOn(startNewRound());
-        // 到达新位置以后的状态
-        moveCotroller.landOn(nowPiece, pieceController);
+        //
+        moveCotroller.moveOn();
+    }
+
+    public void landOn() {
+        moveCotroller = new MoveCotroller(player, playerController, pieceList);
+        // 该地点房屋
+        Building building = this.buildings.getBuilding(player.getY() / 60,
+                player.getX() / 60);
+        if (building != null) {// 获取房屋
+            int event = building.getEvent();
+            // 触发房屋信息
+            moveCotroller.landOn(building, event, player);
+        }
     }
 
     public void purchasePiece(Piece piece){
@@ -86,49 +95,46 @@ public class GameController {
     public void buildHouse(Piece piece, Bank bank){
         int X = player.getX();
         int Y = player.getY();
-        house = new House(X, Y);
         houseController = new HouseController(house, player, piece);
-        playerController = new PlayerController(player, house);
-        pieceController = new PieceController(piece, house);
+        hotelController = new HotelController(hotel, player);
+        playerController = new PlayerController(player, house, hotel);
+        pieceController = new PieceController(piece, house, hotel);
         bankController = new BankController(bank);
         // 玩家建房
-        if (playerController.buildHouse()) {
-            // 房屋拥有者变更为玩家
-            houseController.houseOwner();
-            // 房屋与地皮相关联
-            houseController.pieceOfHouse();
-            // 地皮上建房
-            pieceController.houseBuilt();
-            // 银行建房操作
-            bankController.buildHouse();
-        }
-        else {
-            if (playerController.bankrupt()) {
-                cashOutOrSell(house.getPrice());
+        if (piece.getHouses().getLevel() <4) {
+            house = new House(X, Y);
+            if (playerController.buildHouse()) {
+                // 房屋拥有者变更为玩家
+                houseController.houseOwner();
+                // 房屋与地皮相关联
+                houseController.pieceOfHouse();
+                // 地皮上建房
+                pieceController.houseBuilt();
+                // 银行建房操作
+                bankController.buildHouse();
+            }
+            else {
+                if (playerController.bankrupt()) {
+                    cashOutOrSell(house.getPrice());
+                }
             }
         }
-    }
-
-    public void buildHotel(Piece piece, Bank bank){
-        hotel = new Hotel(piece);
-        hotelController = new HotelController(hotel, player);
-        playerController = new PlayerController(player, hotel);
-        pieceController = new PieceController(piece, hotel);
-        bankController = new BankController(bank);
-        // 玩家建旅馆
-        if (playerController.buildHotel()) {
-            // 旅馆拥有者变更为玩家
-            hotelController.hotelOwner();
-            // 旅馆与地皮相关联
-            hotelController.pieceOfHotel();
-            // 地皮上建旅馆
-            pieceController.hotelBuilt();
-            // 银行建旅馆操作
-            bankController.buildHotel();
-        }
         else {
-            if (playerController.bankrupt()) {
-                cashOutOrSell(hotel.getPrice());
+            hotel = new Hotel(X, Y);
+            if (playerController.buildHotel()) {
+                // 旅馆拥有者变更为玩家
+                hotelController.hotelOwner();
+                // 旅馆与地皮相关联
+                hotelController.pieceOfHotel();
+                // 地皮上建旅馆
+                pieceController.hotelBuilt();
+                // 银行建旅馆操作
+                bankController.buildHotel();
+            }
+            else {
+                if (playerController.bankrupt()) {
+                    cashOutOrSell(hotel.getPrice());
+                }
             }
         }
     }

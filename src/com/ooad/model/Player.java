@@ -272,7 +272,7 @@ public class Player extends Tick implements Port {
             }
             // 玩家移动完毕，停下操作
             if (this.nextTick == this.nowTick) {
-                game.playerStopJudge();
+                game.palyerLand();
             }
         }
     }

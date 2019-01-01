@@ -5,6 +5,7 @@ import com.ooad.controller.ModelController.PieceController;
 import com.ooad.controller.ModelController.PlayerController;
 import com.ooad.model.Building.Building;
 import com.ooad.model.Building.Go;
+import com.ooad.model.Building.Jail;
 import com.ooad.model.Buildings;
 import com.ooad.model.Piece;
 import com.ooad.model.Player;
@@ -26,50 +27,46 @@ public class MoveCotroller {
     private Piece nowPiece = null;
     private int landOnState = 0;
 
-    public MoveCotroller(Monopoly game, Player player, PlayerController playerController, List<Piece> pieceList){
-        this.game = game;
+    public MoveCotroller(Player player, PlayerController playerController, List<Piece> pieceList){
         this.player = player;
         this.playerController = playerController;
         this.pieceList = pieceList;
     }
 
     public void moveOn(){
-        for (int i = 0; i < (60 / game.getNowPlayer().getLastTime()); i++) {
-            Player p = game.getNowPlayer();
+        for (int i = 0; i < (60 / player.getLastTime()); i++) {
             // 单位移动像素
             int movePixel = 1;
-            if (p.getX() < 12 * 60 && p.getY() == 0) {
-                p.setX(p.getX() + movePixel);
-            } else if (p.getX() == 12 *60 && p.getY() < 7 * 60){
-                p.setY(p.getY() + movePixel);
-            } else if (p.getX() > 0 && p.getY() == 7 * 60){
-                p.setX(p.getX() - movePixel);
-            } else if (p.getX() == 0 && p.getY() > 0){
-                p.setY(p.getY() - movePixel);
+            if (player.getX() < 12 * 60 && player.getY() == 0) {
+                player.setX(player.getX() + movePixel);
+            } else if (player.getX() == 12 *60 && player.getY() < 7 * 60){
+                player.setY(player.getY() + movePixel);
+            } else if (player.getX() > 0 && player.getY() == 7 * 60){
+                player.setX(player.getX() - movePixel);
+            } else if (player.getX() == 0 && player.getY() > 0){
+                player.setY(player.getY() - movePixel);
             }
         }
     }
 
-    public void landOn(Piece nowPiece, PieceController pieceController){
-        if(nowPiece.getState() == 0){
-            // 询问玩家是否要购买地皮
-            if(playerController.purchasePiece()) {
-
-            }
-            //否则立刻开始拍卖
-            else {
-
-            }
-        }
-        else {
-            // 向路过玩家收税
-            if (playerController.payRent(pieceController.getRent())) {
-                Player owner = nowPiece.getOwner();
-                PlayerController ownerController = new PlayerController(owner);
-                ownerController.collectRent(pieceController.getRent());
-            }
+    public void landOn(Building b, int event, Player player) {
+        switch (event) {
+            case GameState.HUOSE_EVENT:
+                // 停留在可操作土地
+                game.stopInHouse(b, player);
+                break;
+            case GameState.ORIGIN_EVENT:
+                // 停留在原点
+                game.stopInOrigin(b, player);
+                break;
+            case GameState.PRISON_EVENT:
+                // 停留在监狱
+                game.stopInPrison(b, player);
+                break;
         }
     }
+
+
 
 
 }

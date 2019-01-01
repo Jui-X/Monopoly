@@ -10,8 +10,8 @@ import com.ooad.model.Piece;
  **/
 public class Hotel extends Building{
 
-    public Hotel(Piece piece){
+    public Hotel(int posX, int posY){
+        super(posX, posY);
         this.price = 1500;
-        this.piece = piece;
     }
 }

@@ -24,13 +24,9 @@ public class PieceController {
         this.player = player;
     }
 
-    public PieceController(Piece piece, House house){
+    public PieceController(Piece piece, House house, Hotel hotel){
         this.piece = piece;
         this.house = house;
-    }
-
-    public PieceController(Piece piece, Hotel hotel){
-        this.piece = piece;
         this.hotel = hotel;
     }
 
@@ -64,8 +60,7 @@ public class PieceController {
        if (piece.getHouseNum() < GameState.MAX_HOUSENUM){
            // 地皮上的房产数量增加
            piece.setHouseNum(piece.getHouseNum() + 1);
-           // 地皮新增房产
-           piece.getHouses().add(house);
+           house.setLevel(house.getLevel() + 1);
        }
     }
 
@@ -75,8 +70,6 @@ public class PieceController {
             piece.setHotelNum(piece.getHotelNum() + 1);
             // 地皮新增旅馆
             piece.setHotel(hotel);
-            //
-            piece.getHouses().removeAll(piece.getHouses());
         }
     }
 

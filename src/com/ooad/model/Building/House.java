@@ -12,5 +12,6 @@ public class House extends Building{
 
     public House(int posX, int posY){
         super(posX, posY);
+        this.price = 1000;
     }
 }
