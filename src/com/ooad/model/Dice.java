@@ -137,8 +137,8 @@ public class Dice extends Tick implements Port {
     }
 
 
-    public Dice(){
-        this.point = 0;
+    public Dice(Monopoly game){
+        this.game = game;
     }
 
     public Image getNowImg(){

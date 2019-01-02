@@ -22,15 +22,10 @@ public class MoveCotroller {
 
     private Monopoly game;
     private Player player;
-    private PlayerController playerController;
-    private List<Piece> pieceList;
-    private Piece nowPiece = null;
     private int landOnState = 0;
 
-    public MoveCotroller(Player player, PlayerController playerController, List<Piece> pieceList){
+    public MoveCotroller(Player player){
         this.player = player;
-        this.playerController = playerController;
-        this.pieceList = pieceList;
     }
 
     public void moveOn(){
@@ -49,8 +44,8 @@ public class MoveCotroller {
         }
     }
 
-    public void landOn(Building b, int event, Player player) {
-        switch (event) {
+    public void landOn(Building b, int landOnState, Player player) {
+        switch (landOnState) {
             case GameState.HUOSE_EVENT:
                 // 停留在可操作土地
                 game.stopInHouse(b, player);

@@ -189,10 +189,9 @@ public class Player extends Tick implements Port {
 
     public Player() { }
 
-    public Player(Monopoly game, int number, MoveCotroller move){
+    public Player(Monopoly game, int number){
         this.game = game;
         this.number = number;
-        this.move = move;
         this.houses = null;
         this.hotels = null;
     }
@@ -265,14 +264,14 @@ public class Player extends Tick implements Port {
         this.nowTick = tick;
         // 移动玩家
         if (this.startTick < this.nowTick && this.nextTick >= this.nowTick) {
-            move.moveOn();
+            game.movePlayer();
             // 路过建筑
             if (this.nextTick != this.nowTick) {
                 game.prassBuilding();
             }
             // 玩家移动完毕，停下操作
             if (this.nextTick == this.nowTick) {
-                game.palyerLand();
+                game.palyerStop();
             }
         }
     }

@@ -3,9 +3,11 @@ package com.ooad.controller;
 import com.ooad.controller.ModelController.*;
 import com.ooad.model.*;
 import com.ooad.model.Building.Building;
+import com.ooad.model.Building.Go;
 import com.ooad.model.Building.Hotel;
 import com.ooad.model.Building.House;
 
+import javax.swing.*;
 import java.util.List;
 
 /**
@@ -16,6 +18,7 @@ import java.util.List;
  **/
 public class GameController {
 
+    private Monopoly game;
     private Bank bank;
     private BankController bankController = null;
     private Dice dice1 = null;
@@ -36,15 +39,16 @@ public class GameController {
     private HotelController hotelController = null;
     private CashController cashController = null;
 
-    public GameController(Player player, Bank bank){
+    public GameController(Monopoly game, Player player, Bank bank){
+        this.game = game;
         this.player = player;
         this.bank = bank;
     }
 
     public int startNewRound(){
-        dice1 = new Dice();
-        dice2 = new Dice();
-        otherDice = new Dice();
+        dice1 = new Dice(game);
+        dice2 = new Dice(game);
+        otherDice = new Dice(game);
         diceController1 = new DiceController(dice1);
         diceController2 = new DiceController(dice2);
         otherDiceController = new DiceController(otherDice);
@@ -60,13 +64,13 @@ public class GameController {
     }
 
     public void moveOn(){
-        moveCotroller = new MoveCotroller(player, playerController, pieceList);
-        //
+        moveCotroller = new MoveCotroller(player);
+        // 玩家移动
         moveCotroller.moveOn();
     }
 
     public void landOn() {
-        moveCotroller = new MoveCotroller(player, playerController, pieceList);
+        moveCotroller = new MoveCotroller(player);
         // 该地点房屋
         Building building = this.buildings.getBuilding(player.getY() / 60,
                 player.getX() / 60);
@@ -92,17 +96,18 @@ public class GameController {
         }
     }
 
-    public void buildHouse(Piece piece, Bank bank){
+    public void buildHouse(Building building, Bank bank){
         int X = player.getX();
         int Y = player.getY();
-        houseController = new HouseController(house, player, piece);
-        hotelController = new HotelController(hotel, player);
+        Piece piece = building.getPiece();
         playerController = new PlayerController(player, house, hotel);
         pieceController = new PieceController(piece, house, hotel);
         bankController = new BankController(bank);
         // 玩家建房
         if (piece.getHouses().getLevel() <4) {
             house = new House(X, Y);
+            houseController = new HouseController(house, player, piece);
+
             if (playerController.buildHouse()) {
                 // 房屋拥有者变更为玩家
                 houseController.houseOwner();
@@ -112,15 +117,16 @@ public class GameController {
                 pieceController.houseBuilt();
                 // 银行建房操作
                 bankController.buildHouse();
-            }
-            else {
+            } else {
                 if (playerController.bankrupt()) {
                     cashOutOrSell(house.getPrice());
                 }
             }
+
         }
         else {
             hotel = new Hotel(X, Y);
+            hotelController = new HotelController(hotel, player);
             if (playerController.buildHotel()) {
                 // 旅馆拥有者变更为玩家
                 hotelController.hotelOwner();
@@ -185,6 +191,19 @@ public class GameController {
             }
         }
 
+    }
+
+    public void goPass(Building building) {
+        playerController.goPass(((Go) building).getPassReward());
+    }
+
+    public void payRent(Building building, Player player) {
+        int revenue = building.getRevenue();
+        // 该玩家减少金币
+        playerController.payRent(revenue);
+        PlayerController otherController = new PlayerController(building.getOwner());
+        // 业主得到金币
+        otherController.collectRent(revenue);
     }
 
 }

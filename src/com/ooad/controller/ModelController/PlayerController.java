@@ -93,6 +93,17 @@ public class PlayerController {
         player.setCash(player.getCash() + reward);
     }
 
+    public boolean purchasePiece(){
+        if (player.getCash() >= piece.getPrice() ) {
+            // 玩家现金减少，减少数量对应相应的地皮价格
+            player.setCash(player.getCash() - piece.getPrice());
+            // 玩家地产增加
+            player.getPieces().add(piece);
+            return true;
+        }
+        else {return false;}
+    }
+
     public boolean buildHouse(){
         if (player.getCash() >= house.getPrice()) {
             // 玩家现金减少，减少数量对应相应的房屋价格
@@ -150,17 +161,6 @@ public class PlayerController {
         if (player.getCash() >= price) {
             player.setCash(player.getCash() - price);
             this.payTax((int) (price * 0.1));
-            return true;
-        }
-        else {return false;}
-    }
-
-    public boolean purchasePiece(){
-        if (player.getCash() >= piece.getPrice() ) {
-            // 玩家现金减少，减少数量对应相应的地皮价格
-            player.setCash(player.getCash() - piece.getPrice());
-            // 玩家地产增加
-            player.getPieces().add(piece);
             return true;
         }
         else {return false;}

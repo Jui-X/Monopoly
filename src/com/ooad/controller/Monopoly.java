@@ -5,11 +5,14 @@ import com.ooad.model.*;
 import com.ooad.model.Building.Building;
 import com.ooad.model.Building.Go;
 import com.ooad.model.Building.Jail;
+import com.ooad.util.MyThread;
 import com.ooad.view.GamePanel;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @param: none
@@ -40,15 +43,18 @@ public class Monopoly {
      * 游戏对象
      */
     private GameController running;
+    private MoveCotroller moveCotroller;
 
     private List<Port> models = new ArrayList<Port>();
     private List<Player> players = null;
     private Board board = null;
     private Piece piece = null;
-    private Dice dice = null;
+    private Dice dice1 = null;
+    private Dice dice2 = null;
+    private Dice dice3 = null;
     private TextTip textTip = null;
-    private Buildings buildings;
-    private static Bank bank = new Bank();
+    private Buildings buildings = null;
+    private Bank bank = null;
 
     /**
      * 骰子当前点数
@@ -86,20 +92,64 @@ public class Monopoly {
     public static int MONEY_MAX = -1;
 
 
+    public void setPanel(GamePanel panel) {
+        this.panel = panel;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public Piece getPiece() {
+        return piece;
+    }
+
+    public TextTip getTextTip() {
+        return textTip;
+    }
+
+    public Buildings getBuildings() {
+        return buildings;
+    }
+
+    public Dice getDice() {
+        return dice1;
+    }
+
+    public void setDice(Dice dice) {
+        this.dice1 = dice;
+    }
+
+    public Dice getDice2() {
+        return dice2;
+    }
+
+    public void setDice2(Dice dice2) {
+        this.dice2 = dice2;
+    }
+
+    public Dice getDice3() {
+        return dice3;
+    }
+
+    public void setDice3(Dice dice3) {
+        this.dice3 = dice3;
+    }
+
     public int getPoint() {
         return point;
     }
 
     public void setPoint(int point) {
         this.point = point;
-    }
-
-    public Dice getDice() {
-        return dice;
-    }
-
-    public void setDice(Dice dice) {
-        this.dice = dice;
     }
 
     public Player getNowPlayer() {
@@ -118,10 +168,103 @@ public class Monopoly {
         this.nowPlayerState = nowPlayerState;
     }
 
-    public Monopoly() {
-        this.running = new GameController(nowPlayer, bank);
-//        this.initGame();
+    public static int getDay() {
+        return day;
     }
+
+    public Monopoly() {
+        this.running = new GameController(this, nowPlayer, bank);
+        this.initGame();
+        // 向游戏状态中加入玩家模型
+        this.setPlayers(players);
+    }
+
+    /**
+     *
+     * 初始化游戏对象
+     *
+     */
+    private void initGame() {
+        // 创建新的背景模型
+        this.board = new Board();
+        this.models.add(board);
+        // 创建新的土地模型
+        this.piece = new Piece();
+        this.models.add(piece);
+        // 创建新的文本显示模型
+        this.textTip = new TextTip();
+        this.models.add(textTip);
+        // 创建一个新的建筑模型
+        this.buildings = new Buildings(piece);
+        this.models.add(buildings);
+        // 创建一个新的玩家数组
+        this.players = new ArrayList<Player>();
+        this.players.add(new Player(this, 1));
+        this.players.add(new Player(this, 2));
+        this.models.add(players.get(0));
+        this.models.add(players.get(1));
+        // 创建一个新的骰子模型
+        this.dice1 = new Dice(this);
+//        this.dice2 = new Dice(this);
+//        this.dice3 = new Dice(this);
+        this.models.add(dice1);
+//        this.models.add(dice2);
+//        this.models.add(dice3);
+        //
+        this.bank = new Bank();
+        this.models.add(bank);
+
+    }
+
+    /**
+     *
+     * 控制器启动
+     *
+     */
+    public void start() {
+        // 创建一个计时器
+        this.createGameTimer();
+        // 刷新对象初始数据
+        for (Port temp : this.models) {
+            temp.startGameInit();
+        }
+        // 游戏环境开始
+        this.startGameInit();
+        // panel 初始化
+        this.panel.startGamePanelInit();
+    }
+
+    /**
+     *
+     * 开始游戏设置
+     *
+     */
+    public void startGameInit() {
+        // 设定当前游戏玩家
+        this.nowPlayer = this.players.get(0);
+    }
+
+    /**
+     *
+     * 游戏计时器
+     *
+     */
+    private void createGameTimer() {
+        this.gameTimer = new Timer();
+        this.gameTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                tick++;
+                // 更新各对象
+                for (Port temp : models) {
+                    temp.updateData(tick);
+                }
+                // UI更新
+                panel.repaint();
+            }
+        }, 0, (1000 / rate));
+    }
+
 
     /**
      *
@@ -138,20 +281,34 @@ public class Monopoly {
             this.nextState();
         } else {
             // 设置骰子对象开始转动时间
-            this.dice.setStartTick(Monopoly.tick);
+            this.dice1.setStartTick(Monopoly.tick);
             // 设置骰子对象结束转动时间
-            this.dice.setNextTick(this.dice.getStartTick()
-                    + this.dice.getLastTime());
+            this.dice1.setNextTick(this.dice1.getStartTick()
+                    + this.dice1.getLastTime());
             // 将运行对象点数传入骰子对象
-            this.dice.setPoint(this.getPoint());
+            this.dice1.setPoint(this.getPoint());
             // 转换状态至“移动状态”
             this.nextState();
             // 骰子转动完毕后玩家移动
-            this.getNowPlayer().setStartTick(this.dice.getNextTick() + 10);
+            this.getNowPlayer().setStartTick(this.dice1.getNextTick() + 10);
             this.getNowPlayer().setNextTick(
                     this.getNowPlayer().getStartTick()
                             + this.getNowPlayer().getLastTime()
                             * (this.getPoint() + 1));
+        }
+    }
+
+    /**
+     *
+     * 玩家移动
+     *
+     */
+    public void movePlayer() {
+        // 人物运动
+        for (int i = 0; i < (60 / this.getNowPlayer().getLastTime()); i++) {
+            moveCotroller = new MoveCotroller(nowPlayer);
+            // 移动玩家
+            moveCotroller.moveOn();
         }
     }
 
@@ -260,7 +417,7 @@ public class Monopoly {
     private void passOrigin(Building b, Player player) {
         this.textTip.showTextTip(player, player.getName() + " 路过原点，奖励 "
                 + ((Go) b).getPassReward() + "金币.", 3);
-        player.setCash(player.getCash() + ((Go) b).getPassReward());
+        running.goPass(b);
     }
 
     /**
@@ -268,7 +425,7 @@ public class Monopoly {
      * 玩家移动完毕，停下判断
      *
      */
-    public void palyerLand() {
+    public void palyerStop() {
         // 当前玩家
         Player nowPlayer = this.getNowPlayer();
         if (nowPlayer.getInJail() > 0) {
@@ -289,18 +446,45 @@ public class Monopoly {
      *
      *
      */
-    public void stopInHouse(Building b, Player player) {
-        if (b.isPurchasability()) {// 玩家房屋
-            if (b.getOwner() == null) { // 无人房屋
-                // 执行买房操作
-                running.purchasePiece(b, bank);
+    public void stopInHouse(Building building, Player player) {
+        if (building.isPurchasability()) {// 玩家房屋
+            if (building.getOwner() == null) { // 无人房屋
+                Piece nowPiece = building.getPiece();
+                int price = nowPiece.getPrice();
+                int choose = JOptionPane.showConfirmDialog(
+                        null,
+                        "亲爱的:" + player.getName() + "\r\n" + "是否购买下这块地？\r\n"
+                                + "\r\n" + "价格：" + price + " 金币.");
+                if (choose == JOptionPane.OK_OPTION) {
+                    // 执行买地操作
+                    running.purchasePiece(nowPiece);
+                    this.textTip.showTextTip(player, player.getName()
+                            + " 买下了一块空地.花费了: " + price + "金币. ", 3);
+                } else {
+                    this.textTip.showTextTip(player, player.getName()
+                            + " 金币不足,操作失败. ", 3);
+                }
             } else {// 有人房屋
-                if (b.getOwner().equals(player)) {// 自己房屋
-                    // 执行升级房屋操作
-                    running.buildHouse(b, bank);
+                if (building.getOwner().equals(player)) {// 自己房屋
+                    int price = building.getPrice();
+                    int choose = JOptionPane.showConfirmDialog(null,
+                            "亲爱的:" + player.getName() + "\r\n" + "是否升级这块地？\r\n" + "价格：" + price + " 金币.");
+                    if (choose == JOptionPane.OK_OPTION) {
+                        // 执行升级房屋操作
+                        running.buildHouse(building, bank);
+                        this.textTip.showTextTip(player, player.getName() + ".花费了 " + price
+                                + "金币. ", 3);
+                    } else {
+                        // 增加文本提示
+                        this.textTip.showTextTip(player, player.getName()
+                                + " 金币不足,操作失败. ", 3);
+                    }
                 } else {// 别人房屋
+                    int revenue = building.getRevenue();
                     // 执行交税操作
-                    running.(b, player);
+                    running.payRent(building, player);
+                    this.textTip.showTextTip(player, player.getName() + "经过"
+                            + building.getOwner().getName() + "的地盘，过路费:" + revenue + "金币.", 3);
                 }
             }
         }
@@ -315,7 +499,7 @@ public class Monopoly {
         this.textTip.showTextTip(player, player.getName() + " 在起点停留，奖励 "
                 + ((Go) b).getReward() + "金币.", 3);
         player.setCash(player.getCash() + ((Go) b).getReward());
-        new Thread(new MyThread(run, 1)).start();
+        new Thread(new MyThread(this, 1)).start();
     }
 
     /**
@@ -330,7 +514,6 @@ public class Monopoly {
         String text = ((Jail) b).getEvents()[random];
         this.textTip.showTextTip(player, player.getName() + text + "停留"
                 + (days - 1) + "天.", 3);
-        new Thread(new MyThread(run, 1)).start();
     }
 
     /**
