@@ -94,6 +94,11 @@ public class Player extends Tick implements Port {
      */
     private MoveCotroller move = null;
 
+    /**
+     * 玩家使用人物
+     */
+    private int part = 0;
+
 
     public String getName() {
         return name;
@@ -185,6 +190,14 @@ public class Player extends Tick implements Port {
 
     public void setOtherPlayer(Player otherPlayer) {
         this.otherPlayer = otherPlayer;
+    }
+
+    public int getPart() {
+        return part;
+    }
+
+    public void setPart(int part) {
+        this.part = part;
     }
 
     public Player() { }

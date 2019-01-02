@@ -100,14 +100,12 @@ public class GameController {
         int X = player.getX();
         int Y = player.getY();
         Piece piece = building.getPiece();
-        playerController = new PlayerController(player, house, hotel);
-        pieceController = new PieceController(piece, house, hotel);
         bankController = new BankController(bank);
         // 玩家建房
         if (piece.getHouses().getLevel() <4) {
             house = new House(X, Y);
             houseController = new HouseController(house, player, piece);
-
+            playerController = new PlayerController(player, house);
             if (playerController.buildHouse()) {
                 // 房屋拥有者变更为玩家
                 houseController.houseOwner();
@@ -127,6 +125,7 @@ public class GameController {
         else {
             hotel = new Hotel(X, Y);
             hotelController = new HotelController(hotel, player);
+            playerController = new PlayerController(player, hotel);
             if (playerController.buildHotel()) {
                 // 旅馆拥有者变更为玩家
                 hotelController.hotelOwner();

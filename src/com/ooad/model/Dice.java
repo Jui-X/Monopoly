@@ -42,10 +42,10 @@ public class Dice extends Tick implements Port {
      * 骰子按钮图片
      **/
     public  ImageIcon[] diceIMG = new ImageIcon[] {
-            new ImageIcon("img/dice_btn_state/dice.png"),
-            new ImageIcon("img/dice_btn_state/diceEnter.png"),
-            new ImageIcon("img/dice_btn_state/dicePress.png"),
-            new ImageIcon("img/dice_btn_state/diceBan.png")
+            new ImageIcon("img/dicebtn/dice.png"),
+            new ImageIcon("img/dicebtn/diceEnter.png"),
+            new ImageIcon("img/dicebtn/dicePress.png"),
+            new ImageIcon("img/dicebtn/diceBan.png")
     };
 
     /**

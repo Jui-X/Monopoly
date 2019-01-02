@@ -40,9 +40,13 @@ public class PlayerController {
         this.piece = piece;
     }
 
-    public PlayerController(Player player, House house, Hotel hotel){
+    public PlayerController(Player player, House house){
         this.player = player;
         this.house = house;
+    }
+
+    public PlayerController(Player player, Hotel hotel){
+        this.player = player;
         this.hotel = hotel;
     }
 

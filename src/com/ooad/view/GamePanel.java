@@ -24,7 +24,6 @@ public class GamePanel extends JPanel {
     private BoardView boardView = null;
     private PieceView pieceView = null;
     private DiceView diceView = null;
-    private DiceBtnView diceBtn = null;
     private PlayerView playerView = null;
     private BuildingsView buildingsView = null;
     private TextTipView textTipView = null;
@@ -35,20 +34,49 @@ public class GamePanel extends JPanel {
     /**
      * 全局左上角X
      */
-    public int posX = 100;
+    public int posX = 440;
     /**
      * 全局左上角Y
      * */
-    public int posY = 100;
+    public int posY = 80;
 
 
     public JLayeredPane getLayeredPane() {
         return layeredPane;
     }
 
+    public BoardView getBoardView() {
+        return boardView;
+    }
+
+    public PieceView getPieceView() {
+        return pieceView;
+    }
+
+    public DiceView getDiceView() {
+        return diceView;
+    }
+
+    public PlayerView getPlayerView() {
+        return playerView;
+    }
+
+    public BuildingsView getBuildingsView() {
+        return buildingsView;
+    }
+
+    public TextTipView getTextTipView() {
+        return textTipView;
+    }
+
+    public RunningView getRunning() {
+        return running;
+    }
+
     public void setLayeredPane(JLayeredPane layeredPane) {
         this.layeredPane = layeredPane;
     }
+
 
     public Monopoly getGame() {
         return game;
@@ -68,7 +96,7 @@ public class GamePanel extends JPanel {
 
     public void initUI(){
         // 实例化背景
-        this.boardView = new BoardView(0, 0, 950, 650,
+        this.boardView = new BoardView(0, 0, 1280, 853,
                 game.getBoard(),this);
         // 创建土地UI
         this.pieceView = new PieceView(posX, posY, 950, 650, game.getPiece());
@@ -80,7 +108,7 @@ public class GamePanel extends JPanel {
         // 文字显示面板UI
         this.textTipView = new TextTipView(0,0,950,650,game.getTextTip());
         // 骰子事件UI
-        this.diceView = new DiceView(posX + 64, posY + 320, 170, 90, game);
+        this.diceView = new DiceView(posX + 80, posY + 240, 170, 90, game);
         // 游戏运转界面UI
         this.running = new RunningView(780, 0, 200, 80, game,this);
 

@@ -13,7 +13,7 @@ import java.awt.*;
  **/
 public class RunningView extends Layer{
 
-    private Image bg = new ImageIcon("images/string/days/bg.png").getImage();
+    private Image bg = new ImageIcon("img/days/bg.png").getImage();
     private Image[] numberIMG = {
             new ImageIcon("img/days/0.png").getImage(),
             new ImageIcon("img/days/1.png").getImage(),
@@ -73,14 +73,14 @@ public class RunningView extends Layer{
         int day = game.getDay();
         int posX = 100;
         int posY = 16;
-        while ((int)day >0){
+        while ((int)day > 0){
             int num = day % 10;
             g.drawImage(numberIMG[num], posX,posY,posX + numberIMG[num].getWidth(null),posY + numberIMG[num].getHeight(null),0,0,numberIMG[num].getWidth(null),numberIMG[num].getHeight(null),null);
             day /= 10;
             posX -= 26;
         }
         if (Monopoly.GAME_DAY > 0 ) {
-            posY +=14;
+            posY += 14;
             posX = 100;
             g.drawImage(bgDay, 0, posY, bgDay.getWidth(null),posY + bgDay.getHeight(null), 0, 0, bgDay.getWidth(null), bgDay.getHeight(null), null);
             int day_m = Monopoly.GAME_DAY ;

@@ -524,11 +524,8 @@ public class Monopoly {
      */
     public void gameOver () {
         this.setNowPlayerState(GameState.GAME_STOP);
-//        this.panel.getBackgroundUI().moveToFront();
-//        this.panel.getRunning().moveToFront();
-//        this.panel.getPlayerInfo().moveToFront();
-//        this.panel.getEffect().moveToFront();
-//        this.effect.showImg("timeover2");
+        this.panel.getBoardView().moveToFront();
+        this.panel.getRunning().moveToFront();
 
     }
 

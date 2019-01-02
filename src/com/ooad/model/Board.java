@@ -51,7 +51,7 @@ public class Board extends Tick implements Port {
      */
     @Override
     public void startGameInit (){
-        this.bg = new ImageIcon("images/background/bg.jpg").getImage();
+        this.bg = new ImageIcon("img/background/bg.jpg").getImage();
     }
 
     @Override

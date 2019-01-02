@@ -27,12 +27,10 @@ public class DiceBtnView extends JPanel implements MouseListener {
     private boolean enabled = true;
 
 
-    @Override
     public boolean isEnabled() {
         return enabled;
     }
 
-    @Override
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
@@ -58,9 +56,7 @@ public class DiceBtnView extends JPanel implements MouseListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
+    public void mouseClicked(MouseEvent e) { }
 
     @Override
     public void mousePressed(MouseEvent e) {
