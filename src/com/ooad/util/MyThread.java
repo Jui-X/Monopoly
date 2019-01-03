@@ -1,5 +1,6 @@
 package com.ooad.util;
 
+import com.ooad.controller.GameController;
 import com.ooad.controller.Monopoly;
 
 /**
@@ -16,7 +17,7 @@ public class MyThread  implements Runnable{
 
     int time;
 
-    public MyThread (Monopoly game,int times) {
+    public MyThread (Monopoly game, int times) {
         this.game = game;
         this.times = times;
     }

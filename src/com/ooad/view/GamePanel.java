@@ -1,5 +1,6 @@
 package com.ooad.view;
 
+import com.ooad.controller.GameController;
 import com.ooad.controller.Monopoly;
 import com.ooad.model.Piece;
 
@@ -30,6 +31,7 @@ public class GamePanel extends JPanel {
     private RunningView running = null;
 
     private Monopoly game;
+    private GameController run;
 
     /**
      * 全局左上角X
@@ -76,7 +78,6 @@ public class GamePanel extends JPanel {
     public void setLayeredPane(JLayeredPane layeredPane) {
         this.layeredPane = layeredPane;
     }
-
 
     public Monopoly getGame() {
         return game;

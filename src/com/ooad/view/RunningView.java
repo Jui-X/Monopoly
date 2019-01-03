@@ -1,5 +1,6 @@
 package com.ooad.view;
 
+import com.ooad.controller.GameController;
 import com.ooad.controller.Monopoly;
 
 import javax.swing.*;
@@ -41,10 +42,10 @@ public class RunningView extends Layer{
     };
     private Image rule = new ImageIcon("images/string/days/rule.png").getImage();
 
-    private Monopoly game = null;
+    private Monopoly game;
     private GamePanel panel;
 
-    protected RunningView(int x, int y, int w, int h,Monopoly game,GamePanel panel) {
+    protected RunningView(int x, int y, int w, int h, Monopoly game, GamePanel panel) {
         super(x, y, w, h);
         this.game = game;
         this.panel = panel;

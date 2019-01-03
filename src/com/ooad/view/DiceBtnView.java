@@ -40,7 +40,7 @@ public class DiceBtnView extends JPanel implements MouseListener {
         this.dice = game.getDice();
         this.normalImage = dice.getDiceIMG()[0].getImage();
         this.rolloverImage = dice.getDiceIMG()[1].getImage();
-        this.pressedImage =dice.getDiceIMG()[2].getImage();
+        this.pressedImage = dice.getDiceIMG()[2].getImage();
         this.currentImage = normalImage;
         this.setBounds(x, y, 50, 50);
         this.addMouseListener(this);
@@ -49,7 +49,8 @@ public class DiceBtnView extends JPanel implements MouseListener {
 
     public void paint(Graphics g) {
         this.setOpaque(false); // 背景透明
-        if (enabled){
+        System.out.println(this.enabled);
+        if (this.enabled){
             g.drawImage(currentImage, this.getX(), this.getY(), this.getWidth(),
                     this.getHeight(), this);
         }
@@ -60,7 +61,7 @@ public class DiceBtnView extends JPanel implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        currentImage = pressedImage;
+        currentImage = this.pressedImage;
         if(enabled){
             // 按下
             game.pressButton();
@@ -69,16 +70,16 @@ public class DiceBtnView extends JPanel implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        currentImage = rolloverImage;
+        currentImage = this.rolloverImage;
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        currentImage = rolloverImage;
+        currentImage = this.rolloverImage;
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        currentImage = normalImage;
+        currentImage = this.normalImage;
     }
 }

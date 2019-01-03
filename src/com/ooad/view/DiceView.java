@@ -84,7 +84,7 @@ public class DiceView extends Layer {
      *
      */
     private void showDice() {
-        diceBtn.setEnabled(dice.isBtnState());
+        this.diceBtn.setEnabled(dice.isBtnState());
     }
 
     @Override
@@ -96,7 +96,7 @@ public class DiceView extends Layer {
         //骰子按钮显示
         this.showDice();
         // 骰子按钮刷新
-        diceBtn.update(g);
+        this.diceBtn.update(g);
     }
 
     @Override

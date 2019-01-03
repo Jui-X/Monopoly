@@ -34,6 +34,22 @@ public class Monopoly {
      *
      */
     public static int rate = 30;
+
+    /**
+     * 游戏上限天数 - 1为无上限
+     */
+    public static int GAME_DAY = -1;
+
+    /**
+     * 游戏金钱上线（即胜利条件）-1为无上限
+     */
+    public static int MONEY_MAX = -1;
+
+    /**
+     * 游戏进行天数
+     */
+    public static int day = 1;
+
     /**
      * 游戏主面板
      */
@@ -43,7 +59,7 @@ public class Monopoly {
      * 游戏对象
      */
     private GameController running;
-    private MoveCotroller moveCotroller;
+    private MoveCotroller moveCotroller = null;
 
     private List<Port> models = new ArrayList<Port>();
     private List<Player> players = null;
@@ -78,21 +94,10 @@ public class Monopoly {
      */
     private int nowPlayerState;
 
-    /**
-     * 游戏进行天数
-     */
-    public static int day = 1;
 
-    /**
-     * 游戏上限天数 - 1为无上限
-     */
-    public static int GAME_DAY = -1;
-
-    /**
-     * 游戏金钱上线（即胜利条件）-1为无上限
-     */
-    public static int MONEY_MAX = -1;
-
+    public GamePanel getPanel() {
+        return panel;
+    }
 
     public void setPanel(GamePanel panel) {
         this.panel = panel;
@@ -219,6 +224,20 @@ public class Monopoly {
 
     /**
      *
+     * 开始游戏设置
+     *
+     */
+    public void startGameInit() {
+        // 设定当前游戏玩家
+        this.nowPlayer = this.players.get(0);
+        // 设定当前玩家状态为“使用卡片”
+        this.nowPlayerState = GameState.STATE_THROWDICE;
+        // 随机设定点数
+        this.setPoint((int) (Math.random() * 6));
+    }
+
+    /**
+     *
      * 控制器启动
      *
      */
@@ -233,20 +252,6 @@ public class Monopoly {
         this.startGameInit();
         // panel 初始化
         this.panel.startGamePanelInit();
-    }
-
-    /**
-     *
-     * 开始游戏设置
-     *
-     */
-    public void startGameInit() {
-        // 设定当前游戏玩家
-        this.nowPlayer = this.players.get(0);
-        // 设定当前玩家状态为“使用卡片”
-        this.nowPlayerState = GameState.STATE_THROWDICE;
-        // 随机设定点数
-        this.setPoint((int) (Math.random() * 6));
     }
 
     /**
@@ -268,6 +273,79 @@ public class Monopoly {
                 panel.repaint();
             }
         }, 0, (1000 / rate));
+    }
+
+    /**
+     *
+     * 转换玩家状态
+     *
+     */
+    public void nextState() {
+        // 判断游戏是否得出结果
+        if (gameContinue()) {
+            if (this.nowPlayerState == GameState.STATE_THROWDICE) {
+                // 移动状态
+                this.nowPlayerState = GameState.STATE_MOVE;
+            } else if (this.nowPlayerState == GameState.STATE_MOVE) {
+                this.nowPlayerState = GameState.STATE_THROWDICE;
+                this.nextPlayer();
+                System.out.println(nowPlayer.getName());
+                // 产生一个点数
+                this.setPoint((int) (Math.random() * 6));
+                this.nextState();
+            }
+        }
+    }
+
+    /**
+     * 换人操作
+     */
+    private void nextPlayer() {
+        // 减少时间
+        if (this.nowPlayer.getInJail() > 0) {
+            this.nowPlayer.setInJail(this.nowPlayer.getInJail() - 1);
+        }
+        // 换人
+        if (this.nowPlayer.equals(this.players.get(0))) {
+            this.nowPlayer = this.players.get(1);
+        } else {
+            this.nowPlayer = this.players.get(0);
+            System.out.println(this.nowPlayer.getName());
+            // 结束后游戏天数增加
+            day++;
+        }
+    }
+
+    /**
+     *
+     * 判断游戏是否结束
+     *
+     */
+    public boolean gameContinue() {
+        Player p1 = this.nowPlayer;
+        Player p2 = this.nowPlayer.getOtherPlayer();
+        // 天数
+        if (GAME_DAY > 0 && day >= GAME_DAY) {
+            this.gameOver();
+            return false;
+        }
+        // 最大金钱
+        if (MONEY_MAX > 0 && p1.getCash() >= MONEY_MAX) {
+            this.gameOver();
+            return false;
+        } else if (MONEY_MAX > 0 && p2.getCash() >= MONEY_MAX) {
+            this.gameOver();
+            return false;
+        }
+        // 破产
+        if (p1.getCash() < 0) {
+            this.gameOver();
+            return false;
+        } else if (p2.getCash() < 0) {
+            this.gameOver();
+            return false;
+        }
+        return true;
     }
 
 
@@ -315,77 +393,6 @@ public class Monopoly {
             moveCotroller = new MoveCotroller(this, nowPlayer);
             // 移动玩家
             moveCotroller.moveOn();
-        }
-    }
-
-    /**
-     *
-     * 判断游戏是否结束
-     *
-     */
-    public boolean gameContinue() {
-        Player p1 = this.nowPlayer;
-        Player p2 = this.nowPlayer.getOtherPlayer();
-        // 天数
-        if (GAME_DAY > 0 && day >= GAME_DAY) {
-            this.gameOver();
-            return false;
-        }
-        // 最大金钱
-        if (MONEY_MAX > 0 && p1.getCash() >= MONEY_MAX) {
-            this.gameOver();
-            return false;
-        } else if (MONEY_MAX > 0 && p2.getCash() >= MONEY_MAX) {
-            this.gameOver();
-            return false;
-        }
-        // 破产
-        if (p1.getCash() < 0) {
-            this.gameOver();
-            return false;
-        } else if (p2.getCash() < 0) {
-            this.gameOver();
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * 转换玩家状态
-     *
-     */
-    public void nextState() {
-        // 判断游戏是否得出结果
-        if (gameContinue()) {
-            if (this.nowPlayerState == GameState.STATE_THROWDICE) {
-                // 移动状态
-                this.nowPlayerState = GameState.STATE_MOVE;
-            } else if (this.nowPlayerState == GameState.STATE_MOVE) {
-                this.nextPlayer();
-                // 产生一个点数
-                this.setPoint((int) (Math.random() * 6));
-            }
-        }
-    }
-
-    /**
-     * 换人操作
-     */
-    private void nextPlayer() {
-        // 减少时间
-        if (this.nowPlayer.getInJail() > 0) {
-            this.nowPlayer.setInJail(this.nowPlayer.getInJail() - 1);
-        }
-        // 换人
-        if (this.nowPlayer.equals(this.players.get(0))) {
-            this.nowPlayer = this.players.get(1);
-            System.out.println(this.nowPlayer.getName());
-        } else {
-            this.nowPlayer = this.players.get(0);
-            System.out.println(this.nowPlayer.getName());
-            // 结束后游戏天数增加
-            day++;
         }
     }
 
@@ -530,7 +537,7 @@ public class Monopoly {
      * @param:winer
      */
     public void gameOver () {
-        this.setNowPlayerState(GameState.GAME_STOP);
+        this.nowPlayerState = GameState.GAME_STOP;
         this.panel.getBoardView().moveToFront();
         this.panel.getRunning().moveToFront();
 

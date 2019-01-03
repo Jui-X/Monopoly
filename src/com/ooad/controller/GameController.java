@@ -41,6 +41,7 @@ public class GameController {
     private HotelController hotelController = null;
     private CashController cashController = null;
 
+
     public GameController(Monopoly game, Player player, Bank bank){
         this.game = game;
         this.player = player;

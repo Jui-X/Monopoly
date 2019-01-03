@@ -1,6 +1,7 @@
 package com.ooad.view.config;
 
 import com.ooad.Context.GameState;
+import com.ooad.controller.GameController;
 import com.ooad.controller.Monopoly;
 import com.ooad.model.Player;
 import com.ooad.util.FrameUtil;
