@@ -49,7 +49,6 @@ public class DiceBtnView extends JPanel implements MouseListener {
 
     public void paint(Graphics g) {
         this.setOpaque(false); // 背景透明
-        System.out.println(this.enabled);
         if (this.enabled){
             g.drawImage(currentImage, this.getX(), this.getY(), this.getWidth(),
                     this.getHeight(), this);

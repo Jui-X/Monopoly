@@ -22,6 +22,9 @@ public class Go extends Building{
 
     public Go(int posX, int posY){
         super(posX, posY);
+        this.name = "GO";
+        this.reward = 2000;
+        this.passReward = 1000;
     }
 
     public int getPassReward() {
@@ -34,6 +37,11 @@ public class Go extends Building{
 
     @Override
     public int getEvent() {
+        return GameState.ORIGIN_EVENT;
+    }
+
+    @Override
+    public int passEvent() {
         return GameState.ORIGIN_EVENT;
     }
 }

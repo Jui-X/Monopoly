@@ -109,7 +109,7 @@ public class GamePanel extends JPanel {
         // 文字显示面板UI
         this.textTipView = new TextTipView(0,0,1280,853, game.getTextTip());
         // 骰子事件UI
-        this.diceView = new DiceView(posX + 80, posY + 240, 170, 90, game);
+        this.diceView = new DiceView(posX + 80, posY + 240, 240, 90, game);
         // 游戏运转界面UI
         this.running = new RunningView(780, 0, 200, 80, game,this);
 

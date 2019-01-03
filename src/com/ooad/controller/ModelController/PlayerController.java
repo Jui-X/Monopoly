@@ -22,8 +22,7 @@ public class PlayerController {
     private Dice dice2;
     private Dice otherDice;
     private Piece piece;
-    private House house;
-    private Hotel hotel;
+    private Building building;
 
     public PlayerController(Player player){
         this.player = player;
@@ -41,15 +40,11 @@ public class PlayerController {
         this.piece = piece;
     }
 
-    public PlayerController(Player player, House house){
+    public PlayerController(Player player, Building building){
         this.player = player;
-        this.house = house;
+        this.building = building;
     }
 
-    public PlayerController(Player player, Hotel hotel){
-        this.player = player;
-        this.hotel = hotel;
-    }
 
     public int rollDice(){
         int step = 0;
@@ -107,26 +102,25 @@ public class PlayerController {
         else {return false;}
     }
 
-    public boolean buildHouse(House house){
-        if (player.getCash() >= house.getPrice()) {
+    public boolean buildHouse(Building building){
+        if (player.getCash() >= building.getPrice()) {
             // 玩家现金减少，减少数量对应相应的房屋价格
-            player.setCash(player.getCash() - house.getPrice());
-            if (house != null) {
+            player.setCash(player.getCash() - building.getPrice());
+            if (building != null) {
                 // 玩家房产增加
-                System.out.println();
-                player.getHouses().add(house);
+                player.getHouses().add((House) building);
             }
             return true;
         }
         else {return false;}
     }
 
-    public boolean buildHotel(Hotel hotel){
-        if (player.getCash() >= hotel.getPrice()) {
+    public boolean buildHotel(Building building){
+        if (player.getCash() >= building.getPrice()) {
             // 玩家现金减少，减少数量对应相应的旅馆价格
-            player.setCash(player.getCash() - hotel.getPrice());
+            player.setCash(player.getCash() - building.getPrice());
             // 玩家房产增加
-            player.getHotels().add(hotel);
+            player.getHotels().add((Hotel) building);
             return true;
         }
         else {return false;}
@@ -196,13 +190,13 @@ public class PlayerController {
 
     public void sellHouse(){
         // 卖房，获得半数现金
-        int cash = (int) (player.getCash() + house.getPrice() * 0.5);
+        int cash = (int) (player.getCash() + building.getPrice() * 0.5);
         player.setCash(cash);
     }
 
     public void sellHotel(){
         // 卖旅馆，获得半数现金
-        int cash = (int) (player.getCash() + hotel.getPrice() * 0.5);
+        int cash = (int) (player.getCash() + building.getPrice() * 0.5);
         player.setCash(cash);
     }
 

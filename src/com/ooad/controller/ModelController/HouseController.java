@@ -1,5 +1,6 @@
 package com.ooad.controller.ModelController;
 
+import com.ooad.model.Building.Building;
 import com.ooad.model.Building.House;
 import com.ooad.model.Piece;
 import com.ooad.model.Player;
@@ -15,11 +16,10 @@ public class HouseController {
     private static final int NORAMAL = 1;
     private static final int PLEDGED = 0;
 
-    private House house;
+    private Building house;
     private Player player;
-    private Piece piece;
 
-    public HouseController(House house, Player player) {
+    public HouseController(Building house, Player player) {
         this.house = house;
         this.player = player;
     }

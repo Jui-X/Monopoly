@@ -84,16 +84,6 @@ public class Player extends Tick implements Port {
      */
     private Monopoly game = null;
 
-    /**
-     * 移动控制器
-     */
-    private MoveCotroller move = null;
-
-    /**
-     * 玩家使用人物
-     */
-    private int part = 0;
-
 
     public String getName() {
         return name;
@@ -179,13 +169,6 @@ public class Player extends Tick implements Port {
         this.otherPlayer = otherPlayer;
     }
 
-    public int getPart() {
-        return part;
-    }
-
-    public void setPart(int part) {
-        this.part = part;
-    }
 
     public Player() { }
 

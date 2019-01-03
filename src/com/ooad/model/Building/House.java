@@ -16,6 +16,7 @@ public class House extends Building{
         this.price = 1000;
         this.revenue = (int) (this.price * 0.1);
         this.level = 0;
+        this.name = "house";
     }
 
     @Override

@@ -34,12 +34,13 @@ public class BuildingsView extends Layer {
      * house 图片 1-5级别
      *
      */
-    private  Image HOUSE_02 = new ImageIcon("img/building/house02.png").getImage();
+    private Image HOUSE_02 = new ImageIcon("img/building/house02.png").getImage();
     /**
      * 伪透明图片
      *
      */
-    public  Image TRANSPARENT = new ImageIcon("img/building/transparent.png").getImage();
+    public Image TRANSPARENT = new ImageIcon("img/building/transparent.png").getImage();
+
 
     protected BuildingsView(int x, int y, int w, int h, Buildings buildingsInfo) {
         super(x, y, w, h);
@@ -54,9 +55,10 @@ public class BuildingsView extends Layer {
     private void paintBuildings(Graphics g) {
         for(Building temp : this.building){
             // 房屋绘制
-            paintBuilding(temp,g);
+            paintBuilding(temp, g);
         }
     }
+
     private void paintBuilding(Building building, Graphics g) {
         int x = 0;
         int y = 0;

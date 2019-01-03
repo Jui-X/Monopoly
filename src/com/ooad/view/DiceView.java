@@ -16,6 +16,7 @@ public class DiceView extends Layer {
 
     private Monopoly game;
     private Dice dice;
+    private Dice dice2;
     private DiceBtnView diceBtn;
 
     protected DiceView(int x, int y, int w, int h, Monopoly game) {
@@ -23,6 +24,7 @@ public class DiceView extends Layer {
         setLayout(null);
         this.game = game;
         this.dice = game.getDice();
+        this.dice2 = game.getDice2();
         this.diceBtn = new DiceBtnView(game, 105, 32);
         add(diceBtn);
     }
@@ -32,7 +34,7 @@ public class DiceView extends Layer {
      * 骰子绘制
      *
      */
-    private void paintDice(Graphics g, int i, int j) {
+    private void paintDice(Graphics g, Dice dice, int i, int j) {
         // 设置骰子运动
         if (dice.getStartTick() < dice.getNowTick()
                 && dice.getNextTick() >= dice.getNowTick()) {
@@ -42,9 +44,9 @@ public class DiceView extends Layer {
         }
 
         if (dice.getDiceState() == GameState.DICE_STOP) {
-            this.paintPoint(g, i, j);
+            this.paintPoint(g, dice, i, j);
         } else if (dice.getDiceState() == GameState.DICE_RUNNING) {
-            this.paintRunning(g, i, j, dice.getNowTick() % 4 == 0);
+            this.paintRunning(g, dice, i, j, dice.getNowTick() % 4 == 0);
         }
         g.setColor(Color.black);
         g.drawString(dice.getGame().getNowPlayer().getName() + ":", i + 120,
@@ -56,7 +58,7 @@ public class DiceView extends Layer {
      * 骰子运动状态绘制
      *
      */
-    public void paintRunning(Graphics g, int x, int y, boolean change) {
+    public void paintRunning(Graphics g, Dice dice, int x, int y, boolean change) {
         if (change) {
             dice.addImgCount(1);
         }
@@ -71,7 +73,7 @@ public class DiceView extends Layer {
      * 骰子产生点数绘制
      *
      */
-    public void paintPoint(Graphics g, int x, int y) {
+    public void paintPoint(Graphics g, Dice dice, int x, int y) {
         Image temp = dice.getDicePoints()[dice.getPoint()];
         g.drawImage(temp, x, y, x + temp.getWidth(null),
                 y + temp.getHeight(null), 0, 0, temp.getWidth(null),
@@ -92,7 +94,8 @@ public class DiceView extends Layer {
         //窗口绘制
         this.createWindow(g);
         //骰子绘制
-        this.paintDice(g, -12, -15);
+        this.paintDice(g, dice, -12, -15);
+        this.paintDice(g, dice2, 135, -15);
         //骰子按钮显示
         this.showDice();
         // 骰子按钮刷新

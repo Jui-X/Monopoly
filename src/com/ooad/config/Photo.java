@@ -1,4 +1,4 @@
-package com.ooad.view.config;
+package com.ooad.config;
 
 import javax.swing.*;
 

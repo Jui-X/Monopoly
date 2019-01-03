@@ -66,12 +66,6 @@ public class GameController {
         return step;
     }
 
-    public void moveOn(){
-        moveCotroller = new MoveCotroller(game, player);
-        // 玩家移动
-        moveCotroller.moveOn();
-    }
-
     public void landOn() {
         moveCotroller = new MoveCotroller(game, player);
         // 该地点房屋
@@ -105,10 +99,10 @@ public class GameController {
         bankController = new BankController(bank);
         // 玩家建房
         if (building.getLevel() == 0) {
-            house = new House(X, Y);
-            houseController = new HouseController(house, player);
-            playerController = new PlayerController(player, house);
-            if (playerController.buildHouse(house)) {
+            houseController = new HouseController(building, player);
+            playerController = new PlayerController(player, building);
+            if (playerController.buildHouse(building)) {
+                houseController.levelUp(1);
                 // 房屋拥有者变更为玩家
                 houseController.houseOwner();
                 // 银行建房操作
@@ -121,8 +115,8 @@ public class GameController {
 
         }
         else if (building.getLevel() < 4) {
-            houseController = new HouseController(house, player);
-            playerController = new PlayerController(player, house);
+            houseController = new HouseController(building, player);
+            playerController = new PlayerController(player, building);
             if (playerController.buildHouse(null)) {
                 // 房屋升级
                 houseController.levelUp(building.getLevel() + 1);
@@ -136,8 +130,8 @@ public class GameController {
         }
         else {
             hotel = new Hotel(X, Y);
-            hotelController = new HotelController(hotel, player);
-            playerController = new PlayerController(player, hotel);
+            hotelController = new HotelController(building, player);
+            playerController = new PlayerController(player, building);
             if (playerController.buildHotel(hotel)) {
                 // 旅馆拥有者变更为玩家
                 hotelController.hotelOwner();
@@ -201,6 +195,7 @@ public class GameController {
 
     public void payRent(Building building, Player player) {
         int revenue = building.getRevenue();
+        PlayerController playerController = new PlayerController(player);
         // 该玩家减少金币
         playerController.payRent(revenue);
         PlayerController otherController = new PlayerController(building.getOwner());

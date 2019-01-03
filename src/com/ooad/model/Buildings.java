@@ -25,7 +25,7 @@ public class Buildings extends Tick implements Port {
     private Piece piece = null;
 
     public Buildings(Piece piece) {
-        this.piece  = piece;
+        this.piece = piece;
     }
 
     /**
@@ -73,7 +73,7 @@ public class Buildings extends Tick implements Port {
      * 获得当前位置房屋
      */
     public Building getBuilding(int x,int y){
-        for (Building temp : this.buildings){
+        for (Building temp : buildings){
             if (temp.getPosX() == x && temp.getPosY() == y){
                 return temp;
             }

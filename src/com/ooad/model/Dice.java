@@ -150,7 +150,6 @@ public class Dice extends Tick implements Port {
      * 确认按钮状态
      **/
     private void checkButton() {
-        System.out.println(this.game.getNowPlayerState());
         if (this.game.getNowPlayerState() == GameState.STATE_THROWDICE) {// "掷点状态"
             this.btnState = true;
         } else {

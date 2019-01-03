@@ -3,6 +3,7 @@ package com.ooad.model;
 
 import com.ooad.model.Building.Hotel;
 import com.ooad.model.Building.House;
+import com.ooad.model.Building.Jail;
 
 import javax.swing.*;
 import java.awt.*;
@@ -161,7 +162,7 @@ public class Piece extends Tick implements Port {
             { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
             { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
             { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
-            { PRISON, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE,SPACE, SPACE, SPACE, SPACE, SPACE }};
+            { PRISON, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE,SPACE, SPACE, SPACE, SPACE, PRISON}};
 
     public int[][] getLand() {
         return land;

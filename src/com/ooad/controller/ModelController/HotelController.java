@@ -1,5 +1,6 @@
 package com.ooad.controller.ModelController;
 
+import com.ooad.model.Building.Building;
 import com.ooad.model.Building.Hotel;
 import com.ooad.model.Piece;
 import com.ooad.model.Player;
@@ -12,17 +13,16 @@ import com.ooad.model.Player;
  **/
 public class HotelController {
 
-    private Hotel hotel;
+    private Building building;
     private Player player;
-    private Piece piece;
 
-    public HotelController(Hotel hotel, Player player){
-        this.hotel = hotel;
+    public HotelController(Building building, Player player){
+        this.building = building;
         this.player = player;
     }
 
     public void hotelOwner(){
-        hotel.setOwner(player);
+        building.setOwner(player);
     }
 
 }
