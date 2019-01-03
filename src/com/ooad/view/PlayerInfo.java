@@ -96,7 +96,7 @@ public class PlayerInfo extends JPanel {
         }
         String str = "";
         if (Monopoly.day >= Monopoly.GAME_DAY) {
-            str ="达到游戏天数 "+Monopoly.GAME_DAY+" 天.";
+            str ="达到游戏天数 "+ Monopoly.day +" 天.";
         }
         //最大金钱
         Player p1 = players.get(0);
@@ -107,9 +107,9 @@ public class PlayerInfo extends JPanel {
             str ="\"" + p2.getName() +"\" 金钱达到游戏金钱上限.";
         }
         // 破产
-        if (p1.getCash() < 0 ){
+        if (p1.getCash() <= 0 ){
             str ="\"" + p1.getName() +"\"破产.";
-        } else if (p2.getCash() < 0 ){
+        } else if (p2.getCash() <= 0 ){
             str ="\"" + p2.getName() +"\"破产.";
         }
         FontMetrics fm = g.getFontMetrics();

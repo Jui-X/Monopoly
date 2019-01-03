@@ -67,7 +67,6 @@ public class Monopoly {
     private Piece piece = null;
     private Dice dice1 = null;
     private Dice dice2 = null;
-    private Dice dice3 = null;
     private TextTip textTip = null;
     private Buildings buildings = null;
     private Bank bank = null;
@@ -148,13 +147,13 @@ public class Monopoly {
         this.dice2 = dice2;
     }
 
-    public Dice getDice3() {
-        return dice3;
-    }
-
-    public void setDice3(Dice dice3) {
-        this.dice3 = dice3;
-    }
+//    public Dice getDice3() {
+//        return dice3;
+//    }
+//
+//    public void setDice3(Dice dice3) {
+//        this.dice3 = dice3;
+//    }
 
     public void setBuildings(Buildings buildings) {
         this.buildings = buildings;
@@ -230,10 +229,8 @@ public class Monopoly {
         // 创建一个新的骰子模型
         this.dice1 = new Dice(this);
         this.dice2 = new Dice(this);
-        this.dice3 = new Dice(this);
         this.models.add(dice1);
         this.models.add(dice2);
-        this.models.add(dice3);
         this.bank = new Bank();
         this.models.add(bank);
 
@@ -355,10 +352,10 @@ public class Monopoly {
             return false;
         }
         // 破产
-        if (p1.getCash() < 0) {
+        if (p1.getCash() <= 0) {
             this.gameOver();
             return false;
-        } else if (p2.getCash() < 0) {
+        } else if (p2.getCash() <= 0) {
             this.gameOver();
             return false;
         }
@@ -397,8 +394,7 @@ public class Monopoly {
             // 骰子转动完毕后玩家移动
             this.getNowPlayer().setStartTick(this.dice1.getNextTick() + 10);
             this.getNowPlayer().setNextTick(
-                    this.getNowPlayer().getStartTick()
-                            + this.getNowPlayer().getLastTime()
+                    this.getNowPlayer().getStartTick() + this.getNowPlayer().getLastTime()
                             * (this.getPoint() + this.getPoint2() + 2));
         }
     }
@@ -502,7 +498,7 @@ public class Monopoly {
                     }
                 }
             } else {// 有人房屋
-                if (building.getOwner().equals(player)) {// 自己房屋
+                if (building.getOwner().equals(player) && player.getState() == GameState.IN_JAIL) {// 自己房屋
                         if (player.getCash() >= building.getPrice()) {
                             int price = building.getPrice();
                             int choose = JOptionPane.showConfirmDialog(null,
@@ -550,6 +546,7 @@ public class Monopoly {
     public void stopInPrison(Building b, Player player) {
         int days = (int) (Math.random() * 3) + 2;
         player.setInJail(days);
+        player.setState(GameState.IN_JAIL);
         int random = (int) (Math.random() * ((Jail) b).getEvents().length);
         String text = ((Jail) b).getEvents()[random];
         this.textTip.showTextTip(player, player.getName() + text + "停留"
@@ -567,7 +564,7 @@ public class Monopoly {
         this.nowPlayerState = GameState.GAME_STOP;
         this.panel.getBoardView().moveToFront();
         this.panel.getRunning().moveToFront();
-
+        this.panel.getPlayerInfo().moveToFront();
     }
 
 }

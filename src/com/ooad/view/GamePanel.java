@@ -53,32 +53,12 @@ public class GamePanel extends JPanel {
         return boardView;
     }
 
-    public PieceView getPieceView() {
-        return pieceView;
-    }
-
-    public DiceView getDiceView() {
-        return diceView;
-    }
-
-    public PlayerView getPlayerView() {
-        return playerView;
-    }
-
-    public BuildingsView getBuildingsView() {
-        return buildingsView;
-    }
-
-    public TextTipView getTextTipView() {
-        return textTipView;
-    }
-
     public RunningView getRunning() {
         return running;
     }
 
-    public void setLayeredPane(JLayeredPane layeredPane) {
-        this.layeredPane = layeredPane;
+    public PlayerInfo getPlayerInfo() {
+        return playerInfo;
     }
 
     public Monopoly getGame() {

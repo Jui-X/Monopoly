@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bfce7dd2-227a-4c1b-8426-0837d52b1d6b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/ooad/view/PlayerInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ooad/view/PlayerInfoBtn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ooad/view/PlayersPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ooad/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ooad/Context/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ooad/Context/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ooad/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ooad/controller/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ooad/controller/Monopoly.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ooad/controller/Monopoly.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ooad/model/Building/Go.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ooad/model/Building/Go.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ooad/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ooad/model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ooad/model/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ooad/model/Piece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ooad/view/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ooad/view/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ooad/view/PlayerInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ooad/view/PlayerInfo.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,11 +17,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Monopoly.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Monopoly.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ooad/controller/Monopoly.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="505" column="67" selection-start-line="505" selection-start-column="67" selection-end-line="505" selection-end-column="67" />
+            <state relative-caret-position="206">
+              <caret line="40" column="34" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyThread.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ooad/util/MyThread.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="24" column="23" lean-forward="true" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -39,8 +44,8 @@
       <file leaf-file-name="GameController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ooad/controller/GameController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-15">
-              <caret line="126" column="3" selection-start-line="126" selection-start-column="3" selection-end-line="126" selection-end-column="3" />
+            <state relative-caret-position="189">
+              <caret line="33" column="47" selection-start-line="33" selection-start-column="47" selection-end-line="33" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -48,14 +53,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayerInfo.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PlayerInfo.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/ooad/view/PlayerInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="918">
-              <caret line="160" column="17" lean-forward="true" selection-start-line="160" selection-start-column="17" selection-end-line="160" selection-end-column="17" />
+            <state relative-caret-position="634">
+              <caret line="98" column="41" selection-start-line="98" selection-start-column="41" selection-end-line="98" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GamePanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ooad/view/GamePanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-967">
+              <caret line="61" column="5" lean-forward="true" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -65,6 +79,18 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1178">
               <caret line="86" column="32" selection-start-line="86" selection-start-column="32" selection-end-line="86" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Dice.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ooad/model/Dice.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="151" column="32" selection-start-line="151" selection-start-column="32" selection-end-line="151" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -84,19 +110,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GamePanel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ooad/view/GamePanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="113" column="63" selection-start-line="113" selection-start-column="63" selection-end-line="113" selection-end-column="63" />
-              <folding>
-                <element signature="e#1681#1682#0" expanded="true" />
-                <element signature="e#1708#1709#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="GameFrame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ooad/view/GameFrame.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -106,32 +119,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayerInfoBtn.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ooad/view/PlayerInfoBtn.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="39" column="39" selection-start-line="39" selection-start-column="39" selection-end-line="39" selection-end-column="39" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="GameState.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ooad/Context/GameState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="92" column="7" lean-forward="true" selection-start-line="92" selection-start-column="7" selection-end-line="92" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ooad/model/Player.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="232" column="5" lean-forward="true" selection-start-line="232" selection-start-column="5" selection-end-line="232" selection-end-column="5" />
+            <state relative-caret-position="155">
+              <caret line="42" column="35" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -224,7 +216,6 @@
         <option value="$PROJECT_DIR$/src/com/ooad/config/FrameConfig.java" />
         <option value="$PROJECT_DIR$/src/com/ooad/view/DiceBtnView.java" />
         <option value="$PROJECT_DIR$/src/com/ooad/view/DiceView.java" />
-        <option value="$PROJECT_DIR$/src/com/ooad/model/Piece.java" />
         <option value="$PROJECT_DIR$/src/com/ooad/model/Building/Building.java" />
         <option value="$PROJECT_DIR$/src/com/ooad/model/Building/House.java" />
         <option value="$PROJECT_DIR$/src/com/ooad/controller/ModelController/HouseController.java" />
@@ -234,12 +225,13 @@
         <option value="$PROJECT_DIR$/src/com/ooad/model/Player.java" />
         <option value="$PROJECT_DIR$/src/com/ooad/model/Building/Go.java" />
         <option value="$PROJECT_DIR$/src/com/ooad/view/PlayerInfoBtn.java" />
-        <option value="$PROJECT_DIR$/src/com/ooad/view/PlayerInfo.java" />
-        <option value="$PROJECT_DIR$/src/com/ooad/view/GamePanel.java" />
         <option value="$PROJECT_DIR$/src/com/ooad/view/PlayersPanel.java" />
         <option value="$PROJECT_DIR$/src/com/ooad/controller/GameController.java" />
-        <option value="$PROJECT_DIR$/src/com/ooad/controller/Monopoly.java" />
         <option value="$PROJECT_DIR$/src/com/ooad/Context/GameState.java" />
+        <option value="$PROJECT_DIR$/src/com/ooad/model/Piece.java" />
+        <option value="$PROJECT_DIR$/src/com/ooad/view/GamePanel.java" />
+        <option value="$PROJECT_DIR$/src/com/ooad/controller/Monopoly.java" />
+        <option value="$PROJECT_DIR$/src/com/ooad/view/PlayerInfo.java" />
       </list>
     </option>
   </component>
@@ -327,13 +319,6 @@
               <item name="ooad" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
               <item name="Building" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Monopoly" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Monopoly" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ooad" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Monopoly" type="b2602c69:ProjectViewProjectNode" />
@@ -428,12 +413,12 @@
       <workItem from="1546482453529" duration="17035000" />
       <workItem from="1546508430166" duration="6052000" />
       <workItem from="1546517688745" duration="8991000" />
-      <workItem from="1546527081542" duration="3545000" />
+      <workItem from="1546527081542" duration="6477000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="187352000" />
+    <option name="totallyTimeSpent" value="190284000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -613,26 +598,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ooad/util/MyThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="24" column="23" lean-forward="true" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ooad/model/Dice.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="151" column="32" selection-start-line="151" selection-start-column="32" selection-end-line="151" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ooad/config/Photo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -676,18 +641,6 @@
             <element signature="imports" expanded="true" />
             <element signature="e#2188#2189#0" expanded="true" />
             <element signature="e#2246#2247#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ooad/model/Piece.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15">
-          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3489#3490#0" expanded="true" />
-            <element signature="e#3516#3517#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -824,17 +777,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ooad/view/GamePanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="113" column="63" selection-start-line="113" selection-start-column="63" selection-end-line="113" selection-end-column="63" />
-          <folding>
-            <element signature="e#1681#1682#0" expanded="true" />
-            <element signature="e#1708#1709#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ooad/view/PlayersPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -852,33 +794,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ooad/view/PlayerInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="160" column="17" lean-forward="true" selection-start-line="160" selection-start-column="17" selection-end-line="160" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ooad/controller/GameController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15">
-          <caret line="126" column="3" selection-start-line="126" selection-start-column="3" selection-end-line="126" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ooad/Context/GameState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="92" column="7" lean-forward="true" selection-start-line="92" selection-start-column="7" selection-end-line="92" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ooad/view/RunningView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1178">
@@ -889,10 +804,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ooad/util/MyThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="24" column="23" lean-forward="true" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ooad/model/Piece.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="153" column="77" lean-forward="true" selection-start-line="153" selection-start-column="77" selection-end-line="153" selection-end-column="77" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ooad/model/Dice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="151" column="32" selection-start-line="151" selection-start-column="32" selection-end-line="151" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ooad/Context/GameState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="42" column="35" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ooad/view/GamePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-967">
+          <caret line="61" column="5" lean-forward="true" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ooad/controller/Monopoly.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="505" column="67" selection-start-line="505" selection-start-column="67" selection-end-line="505" selection-end-column="67" />
+        <state relative-caret-position="206">
+          <caret line="40" column="34" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ooad/controller/GameController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="33" column="47" selection-start-line="33" selection-start-column="47" selection-end-line="33" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ooad/view/PlayerInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="634">
+          <caret line="98" column="41" selection-start-line="98" selection-start-column="41" selection-end-line="98" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
