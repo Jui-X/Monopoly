@@ -67,6 +67,7 @@ public class Monopoly {
     private Piece piece = null;
     private Dice dice1 = null;
     private Dice dice2 = null;
+    private Dice dice3 = null;
     private TextTip textTip = null;
     private Buildings buildings = null;
     private Bank bank = null;
@@ -80,6 +81,11 @@ public class Monopoly {
      * 骰子2当前点数
      */
     private int point2;
+
+    /**
+     * 骰子3当前点数
+     */
+    private int point3;
 
     /**
      * 游戏计时器
@@ -147,13 +153,13 @@ public class Monopoly {
         this.dice2 = dice2;
     }
 
-//    public Dice getDice3() {
-//        return dice3;
-//    }
-//
-//    public void setDice3(Dice dice3) {
-//        this.dice3 = dice3;
-//    }
+    public Dice getDice3() {
+        return dice3;
+    }
+
+    public void setDice3(Dice dice3) {
+        this.dice3 = dice3;
+    }
 
     public void setBuildings(Buildings buildings) {
         this.buildings = buildings;
@@ -173,6 +179,14 @@ public class Monopoly {
 
     public void setPoint2(int point2) {
         this.point2 = point2;
+    }
+
+    public int getPoint3() {
+        return point3;
+    }
+
+    public void setPoint3(int point3) {
+        this.point3 = point3;
     }
 
     public Player getNowPlayer() {
@@ -229,8 +243,10 @@ public class Monopoly {
         // 创建一个新的骰子模型
         this.dice1 = new Dice(this);
         this.dice2 = new Dice(this);
+        this.dice3 = new Dice(this);
         this.models.add(dice1);
         this.models.add(dice2);
+        this.models.add(dice3);
         this.bank = new Bank();
         this.models.add(bank);
 
@@ -249,6 +265,7 @@ public class Monopoly {
         // 随机设定点数
         this.setPoint((int) (Math.random() * 6));
         this.setPoint2((int) (Math.random() * 6));
+        this.setPoint3((int) (Math.random() * 6));
     }
 
     /**
@@ -306,7 +323,8 @@ public class Monopoly {
                 this.nextPlayer();
                 // 产生一个点数
                 this.setPoint((int) (Math.random() * 6));
-                this.setPoint2((int) (Math.random() * (6-0) + 0));
+                this.setPoint2((int) (Math.random() * 6));
+                this.setPoint3((int) (Math.random() * 6));
 //                this.nextState();
             }
         }
@@ -389,13 +407,14 @@ public class Monopoly {
             // 将运行对象点数传入骰子对象
             this.dice1.setPoint(this.getPoint());
             this.dice2.setPoint(this.getPoint2());
+            this.dice3.setPoint(this.getPoint3());
             // 转换状态至“移动状态”
             this.nextState();
             // 骰子转动完毕后玩家移动
             this.getNowPlayer().setStartTick(this.dice1.getNextTick() + 10);
             this.getNowPlayer().setNextTick(
                     this.getNowPlayer().getStartTick() + this.getNowPlayer().getLastTime()
-                            * (this.getPoint() + this.getPoint2() + 2));
+                            * (this.getPoint() + this.getPoint2() + this.getPoint3() + 2));
         }
     }
 
@@ -498,7 +517,7 @@ public class Monopoly {
                     }
                 }
             } else {// 有人房屋
-                if (building.getOwner().equals(player) && player.getState() == GameState.IN_JAIL) {// 自己房屋
+                if (building.getOwner().equals(player)) {// 自己房屋
                         if (player.getCash() >= building.getPrice()) {
                             int price = building.getPrice();
                             int choose = JOptionPane.showConfirmDialog(null,
@@ -563,7 +582,7 @@ public class Monopoly {
     public void gameOver () {
         this.nowPlayerState = GameState.GAME_STOP;
         this.panel.getBoardView().moveToFront();
-        this.panel.getRunning().moveToFront();
+        //this.panel.getRunning().moveToFront();
         this.panel.getPlayerInfo().moveToFront();
     }
 

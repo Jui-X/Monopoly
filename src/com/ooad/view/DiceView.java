@@ -17,6 +17,7 @@ public class DiceView extends Layer {
     private Monopoly game;
     private Dice dice;
     private Dice dice2;
+    private Dice dice3;
     private DiceBtnView diceBtn;
 
     protected DiceView(int x, int y, int w, int h, Monopoly game) {
@@ -25,6 +26,7 @@ public class DiceView extends Layer {
         this.game = game;
         this.dice = game.getDice();
         this.dice2 = game.getDice2();
+        this.dice3 = game.getDice3();
         this.diceBtn = new DiceBtnView(game, 105, 32);
         add(diceBtn);
     }
@@ -96,6 +98,7 @@ public class DiceView extends Layer {
         //骰子绘制
         this.paintDice(g, dice, -12, -15);
         this.paintDice(g, dice2, 135, -15);
+        this.paintPoint(g, dice3, 65,65);
         //骰子按钮显示
         this.showDice();
         // 骰子按钮刷新
