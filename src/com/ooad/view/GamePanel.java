@@ -29,6 +29,8 @@ public class GamePanel extends JPanel {
     private BuildingsView buildingsView = null;
     private TextTipView textTipView = null;
     private RunningView running = null;
+    private PlayersPanel playersPanel = null;
+    private PlayerInfo playerInfo = null;
 
     private Monopoly game;
     private GameController run;
@@ -40,7 +42,7 @@ public class GamePanel extends JPanel {
     /**
      * 全局左上角Y
      * */
-    public int posY = 80;
+    public int posY = 90;
 
 
     public JLayeredPane getLayeredPane() {
@@ -109,9 +111,14 @@ public class GamePanel extends JPanel {
         // 文字显示面板UI
         this.textTipView = new TextTipView(0,0,1280,853, game.getTextTip());
         // 骰子事件UI
-        this.diceView = new DiceView(posX + 80, posY + 240, 240, 90, game);
+        this.diceView = new DiceView(posX + 80, posY + 240, 250, 90, game);
         // 游戏运转界面UI
         this.running = new RunningView(780, 0, 200, 80, game,this);
+        // 玩家信息面板UI
+        this.playersPanel = new PlayersPanel(posX + 80, posY + 66, 250,
+                160, game.getPlayers());
+        // 玩家信息面板显示
+        this.playerInfo = new PlayerInfo(game.getPlayers(),this);
 
         // lays存放所有panel组件
         lays = new ArrayList<Layer>();
@@ -121,6 +128,7 @@ public class GamePanel extends JPanel {
         lays.add(buildingsView);
         lays.add(pieceView);
         lays.add(running);
+        lays.add(playersPanel);
 
         layeredPane = new JLayeredPane();
         layeredPane.setLayout(null);
@@ -131,7 +139,9 @@ public class GamePanel extends JPanel {
         layeredPane.add(this.buildingsView, add++);
         layeredPane.add(this.pieceView, add++);
         layeredPane.add(this.running, add++);
+        layeredPane.add(this.playersPanel, add++);
         layeredPane.add(this.boardView, add++);
+        layeredPane.add(this.playerInfo, add++);
 
         add(layeredPane);
     }

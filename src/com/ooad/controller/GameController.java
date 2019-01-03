@@ -78,21 +78,6 @@ public class GameController {
         }
     }
 
-    public void purchasePiece(Piece piece){
-        playerController = new PlayerController(player, piece);
-        pieceController = new PieceController(piece, player);
-        // 玩家进行买房操作
-        if (playerController.purchasePiece()) {
-            // 地皮被卖
-            pieceController.isPurchased();
-        }
-        else {
-            if (playerController.bankrupt()) {
-                cashOutOrSell(piece.getPrice());
-            }
-        }
-    }
-
     public void buildHouse(Building building, Bank bank){
         int X = player.getX();
         int Y = player.getY();
@@ -109,7 +94,7 @@ public class GameController {
                 bankController.buildHouse();
             } else {
                 if (playerController.bankrupt()) {
-                    cashOutOrSell(house.getPrice());
+                    //cashOutOrSell(house.getPrice());
                 }
             }
 
@@ -117,14 +102,14 @@ public class GameController {
         else if (building.getLevel() < 4) {
             houseController = new HouseController(building, player);
             playerController = new PlayerController(player, building);
-            if (playerController.buildHouse(null)) {
+            if (playerController.buildHouse(building)) {
                 // 房屋升级
                 houseController.levelUp(building.getLevel() + 1);
                 // 银行建房操作
                 bankController.buildHouse();
             } else {
                 if (playerController.bankrupt()) {
-                    cashOutOrSell(house.getPrice());
+                    //cashOutOrSell(house.getPrice());
                 }
             }
         }
@@ -140,7 +125,7 @@ public class GameController {
             }
             else {
                 if (playerController.bankrupt()) {
-                    cashOutOrSell(hotel.getPrice());
+                    //cashOutOrSell(hotel.getPrice());
                 }
             }
         }
@@ -189,7 +174,8 @@ public class GameController {
 
     }
 
-    public void goPass(Building building) {
+    public void goPass(Building building, Player player) {
+        PlayerController playerController = new PlayerController(player);
         playerController.goPass(((Go) building).getPassReward());
     }
 
@@ -201,6 +187,7 @@ public class GameController {
         PlayerController otherController = new PlayerController(building.getOwner());
         // 业主得到金币
         otherController.collectRent(revenue);
+        new Thread(new MyThread(game, 1)).start();
     }
 
 }

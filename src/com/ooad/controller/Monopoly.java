@@ -453,7 +453,7 @@ public class Monopoly {
     private void passOrigin(Building b, Player player) {
         this.textTip.showTextTip(player, player.getName() + " 路过原点，奖励 "
                 + ((Go) b).getPassReward() + "金币.", 3);
-        running.goPass(b);
+        running.goPass(b, player);
     }
 
     /**
@@ -461,7 +461,7 @@ public class Monopoly {
      * 玩家移动完毕，停下判断
      *
      */
-    public void palyerStop() {
+    public void playerStop() {
         // 当前玩家
         Player nowPlayer = this.getNowPlayer();
         if (nowPlayer.getInJail() > 0) {
@@ -491,28 +491,32 @@ public class Monopoly {
                         "亲爱的:" + player.getName() + "\r\n" + "是否购买下这块地？\r\n"
                                 + "\r\n" + "价格：" + price + " 金币.");
                 if (choose == JOptionPane.OK_OPTION) {
-                    // 执行买地操作
-                    running.buildHouse(building, this.bank);
-                    this.textTip.showTextTip(player, player.getName()
-                            + " 买下了一块空地.花费了: " + price + "金币. ", 3);
-                } else {
-                    this.textTip.showTextTip(player, player.getName()
-                            + " 金币不足,操作失败. ", 3);
+                    if (player.getCash() >= building.getPrice()) {
+                        // 执行买地操作
+                        running.buildHouse(building, this.bank);
+                        this.textTip.showTextTip(player, player.getName()
+                                + " 买下了一块空地.花费了: " + price + "金币. ", 3);
+                    } else {
+                        this.textTip.showTextTip(player, player.getName()
+                                + " 金币不足,操作失败. ", 3);
+                    }
                 }
             } else {// 有人房屋
                 if (building.getOwner().equals(player)) {// 自己房屋
-                    int price = building.getPrice();
-                    int choose = JOptionPane.showConfirmDialog(null,
-                            "亲爱的:" + player.getName() + "\r\n" + "是否升级这块地？\r\n" + "价格：" + price + " 金币.");
-                    if (choose == JOptionPane.OK_OPTION) {
-                        // 执行升级房屋操作
-                        running.buildHouse(building, this.bank);
-                        this.textTip.showTextTip(player, player.getName() + ".花费了 " + price
-                                + "金币. ", 3);
-                    } else {
-                        // 增加文本提示
-                        this.textTip.showTextTip(player, player.getName()
-                                + " 金币不足,操作失败. ", 3);
+                        if (player.getCash() >= building.getPrice()) {
+                            int price = building.getPrice();
+                            int choose = JOptionPane.showConfirmDialog(null,
+                                    "亲爱的:" + player.getName() + "\r\n" + "是否升级这块地？\r\n" + "价格：" + price + " 金币.");
+                            if (choose == JOptionPane.OK_OPTION) {
+                                // 执行升级房屋操作
+                                running.buildHouse(building, this.bank);
+                                this.textTip.showTextTip(player, player.getName() + ".花费了 " + price
+                                        + "金币. ", 3);
+                        } else {
+                                // 增加文本提示
+                                this.textTip.showTextTip(player, player.getName()
+                                        + " 金币不足,操作失败. ", 3);
+                        }
                     }
                 } else {// 别人房屋
                     int revenue = building.getRevenue();
@@ -523,6 +527,7 @@ public class Monopoly {
                 }
             }
         }
+        new Thread(new MyThread(this, 1)).start();
     }
 
     /**

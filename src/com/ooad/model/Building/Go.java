@@ -42,6 +42,6 @@ public class Go extends Building{
 
     @Override
     public int passEvent() {
-        return GameState.ORIGIN_EVENT;
+        return GameState.ORIGIN_PASS_EVENT;
     }
 }

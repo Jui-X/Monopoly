@@ -86,7 +86,7 @@ public class GameState {
     /**
      * 玩家初始金钱
      */
-    public static int PLAYER_ORIGIN_CASH = 15000;
+    public static int PLAYER_ORIGIN_CASH = 1000;
 
     /**
      * 无建筑

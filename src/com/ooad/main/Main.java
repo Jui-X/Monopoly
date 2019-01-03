@@ -1,3 +1,5 @@
+package com.ooad.main;
+
 import com.ooad.config.FrameConfig;
 import com.ooad.view.GameFrame;
 import com.ooad.view.StartFrame;
