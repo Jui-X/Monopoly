@@ -1,5 +1,6 @@
 package com.ooad.model.Building;
 
+import com.ooad.Context.GameState;
 import com.ooad.model.Piece;
 
 /**
@@ -14,5 +15,11 @@ public class House extends Building{
         super(posX, posY);
         this.price = 1000;
         this.revenue = (int) (this.price * 0.1);
+        this.level = 0;
+    }
+
+    @Override
+    public int getEvent() {
+        return GameState.HOUSE_EVENT;
     }
 }

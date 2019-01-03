@@ -99,14 +99,14 @@ public class GamePanel extends JPanel {
         this.boardView = new BoardView(0, 0, 1280, 853,
                 game.getBoard(),this);
         // 创建土地UI
-        this.pieceView = new PieceView(posX, posY, 950, 650, game.getPiece());
+        this.pieceView = new PieceView(posX, posY, 1280, 853, game.getPiece());
         // 创建房屋UI
-        this.buildingsView = new BuildingsView(posX, posY, 950, 650,
+        this.buildingsView = new BuildingsView(posX, posY, 1280, 853,
                 game.getBuildings());
         // 创建玩家显示UI
-        this.playerView = new PlayerView(posX, posY, 950, 650,game, game.getPlayers());
+        this.playerView = new PlayerView(posX, posY, 1280, 853, game, game.getPlayers());
         // 文字显示面板UI
-        this.textTipView = new TextTipView(0,0,950,650,game.getTextTip());
+        this.textTipView = new TextTipView(0,0,1280,853, game.getTextTip());
         // 骰子事件UI
         this.diceView = new DiceView(posX + 80, posY + 240, 170, 90, game);
         // 游戏运转界面UI

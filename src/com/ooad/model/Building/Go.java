@@ -1,5 +1,6 @@
 package com.ooad.model.Building;
 
+import com.ooad.Context.GameState;
 import com.ooad.controller.ModelController.PlayerController;
 
 /**
@@ -29,5 +30,10 @@ public class Go extends Building{
 
     public int getReward() {
         return reward;
+    }
+
+    @Override
+    public int getEvent() {
+        return GameState.ORIGIN_EVENT;
     }
 }

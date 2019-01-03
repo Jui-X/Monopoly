@@ -21,18 +21,8 @@ public class HotelController {
         this.player = player;
     }
 
-    public HotelController(Hotel hotel, Player player, Piece piece) {
-        this.hotel = hotel;
-        this.player = player;
-        this.piece = piece;
-    }
-
     public void hotelOwner(){
         hotel.setOwner(player);
-    }
-
-    public void pieceOfHotel(){
-        hotel.setPiece(piece);
     }
 
 }

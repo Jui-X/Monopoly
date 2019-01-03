@@ -59,21 +59,6 @@ public class Piece extends Tick implements Port {
     protected Hotel hotel;
 
     /**
-     * 方格X坐标
-     **/
-    private int X;
-
-    /**
-     * 方格Y坐标
-     **/
-    private int Y;
-
-    /**
-     * 下一块方格
-     **/
-    private Piece nextPiece;
-
-    /**
      * 土地图片
      **/
     private Image pieceIMG;
@@ -148,30 +133,6 @@ public class Piece extends Tick implements Port {
         this.hotel = hotel;
     }
 
-    public int getX() {
-        return X;
-    }
-
-    public void setX(int x) {
-        X = x;
-    }
-
-    public int getY() {
-        return Y;
-    }
-
-    public void setY(int y) {
-        Y = y;
-    }
-
-    public Piece getNextPiece() {
-        return nextPiece;
-    }
-
-    public void setNextPiece(Piece nextPiece) {
-        this.nextPiece = nextPiece;
-    }
-
     public Image getPieceIMG() {
         return pieceIMG;
     }
@@ -192,7 +153,7 @@ public class Piece extends Tick implements Port {
         this.pieceIMG =  new ImageIcon("img/background/land.jpg").getImage();
     }
 
-    protected int[][] land= {
+    protected int[][] land = {
             // 模仿大富翁其中一个地图设置
             { ORIGIN, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, PRISON },
             { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },

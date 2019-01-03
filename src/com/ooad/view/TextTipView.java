@@ -14,7 +14,7 @@ import java.awt.*;
 public class TextTipView extends Layer {
 
     private TextTip textTip = null;
-    private Image bg = new ImageIcon("images/window/tip_01.png").getImage();
+    private Image bg = new ImageIcon("img/background/tip.png").getImage();
 
     private Point pointWindow = null;
 
@@ -33,8 +33,8 @@ public class TextTipView extends Layer {
     private void paintTextTip(Graphics g, TextTipView textTip2) {
         if (textTip.getStartTick() < textTip.getNowTick()
                 && textTip.getNextTick() >= textTip.getNowTick()) {
-            this.pointWindow.x = textTip.getPlayer().getX() + 45;
-            this.pointWindow.y =textTip.getPlayer().getY() + 10;
+            this.pointWindow.x = textTip.getPlayer().getX() + 375;
+            this.pointWindow.y =textTip.getPlayer().getY() - 20;
             g.drawImage(bg, pointWindow.x, pointWindow.y, pointWindow.x + bg.getWidth(null),
                     pointWindow.y + bg.getHeight(null), 0, 0, bg.getWidth(null),
                     bg.getHeight(null), null);

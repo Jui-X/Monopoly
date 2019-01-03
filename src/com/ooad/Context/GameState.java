@@ -111,7 +111,7 @@ public class GameState {
     /**
      * 停留在建筑返回状态
      */
-    public  final static int HUOSE_EVENT = 1;
+    public  final static int HOUSE_EVENT = 1;
 
 
     public  final static int ORIGIN_EVENT = 2;

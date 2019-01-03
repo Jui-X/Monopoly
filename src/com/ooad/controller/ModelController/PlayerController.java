@@ -1,6 +1,7 @@
 package com.ooad.controller.ModelController;
 
 import com.ooad.Context.GameState;
+import com.ooad.model.Building.Building;
 import com.ooad.model.Building.Hotel;
 import com.ooad.model.Building.House;
 import com.ooad.model.Dice;
@@ -101,25 +102,26 @@ public class PlayerController {
         if (player.getCash() >= piece.getPrice() ) {
             // 玩家现金减少，减少数量对应相应的地皮价格
             player.setCash(player.getCash() - piece.getPrice());
-            // 玩家地产增加
-            player.getPieces().add(piece);
             return true;
         }
         else {return false;}
     }
 
-    public boolean buildHouse(){
+    public boolean buildHouse(House house){
         if (player.getCash() >= house.getPrice()) {
             // 玩家现金减少，减少数量对应相应的房屋价格
             player.setCash(player.getCash() - house.getPrice());
-            // 玩家房产增加
-            player.getHouses().add(house);
+            if (house != null) {
+                // 玩家房产增加
+                System.out.println();
+                player.getHouses().add(house);
+            }
             return true;
         }
         else {return false;}
     }
 
-    public boolean buildHotel(){
+    public boolean buildHotel(Hotel hotel){
         if (player.getCash() >= hotel.getPrice()) {
             // 玩家现金减少，减少数量对应相应的旅馆价格
             player.setCash(player.getCash() - hotel.getPrice());

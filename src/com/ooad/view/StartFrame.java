@@ -15,7 +15,7 @@ public class StartFrame extends JFrame {
 
         this.setTitle("Monopoly");
 
-        this.setSize(440, 430);
+        this.setSize(600, 480);
 
         this.setLocationByPlatform(true);
 

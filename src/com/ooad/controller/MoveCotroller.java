@@ -22,31 +22,29 @@ public class MoveCotroller {
 
     private Monopoly game;
     private Player player;
-    private int landOnState = 0;
 
-    public MoveCotroller(Player player){
+    public MoveCotroller(Monopoly game, Player player){
+        this.game = game;
         this.player = player;
     }
 
     public void moveOn(){
-        for (int i = 0; i < (60 / player.getLastTime()); i++) {
-            // 单位移动像素
-            int movePixel = 1;
-            if (player.getX() < 12 * 60 && player.getY() == 0) {
-                player.setX(player.getX() + movePixel);
-            } else if (player.getX() == 12 *60 && player.getY() < 7 * 60){
-                player.setY(player.getY() + movePixel);
-            } else if (player.getX() > 0 && player.getY() == 7 * 60){
-                player.setX(player.getX() - movePixel);
-            } else if (player.getX() == 0 && player.getY() > 0){
-                player.setY(player.getY() - movePixel);
-            }
+        // 单位移动像素
+        int movePixel = 1;
+        if (player.getX() < 12 * 60 && player.getY() == 0) {
+            player.setX(player.getX() + movePixel);
+        } else if (player.getX() == 12 *60 && player.getY() < 6 * 60){
+            player.setY(player.getY() + movePixel);
+        } else if (player.getX() > 0 && player.getY() == 6 * 60){
+            player.setX(player.getX() - movePixel);
+        } else if (player.getX() == 0 && player.getY() > 0){
+            player.setY(player.getY() - movePixel);
         }
     }
 
     public void landOn(Building b, int landOnState, Player player) {
         switch (landOnState) {
-            case GameState.HUOSE_EVENT:
+            case GameState.HOUSE_EVENT:
                 // 停留在可操作土地
                 game.stopInHouse(b, player);
                 break;

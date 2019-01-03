@@ -24,18 +24,12 @@ public class HouseController {
         this.player = player;
     }
 
-    public HouseController(House house, Player player, Piece piece){
-        this.house = house;
-        this.player = player;
-        this.piece = piece;
-    }
-
     public void houseOwner(){
         house.setOwner(player);
     }
 
-    public void pieceOfHouse(){
-        house.setPiece(piece);
+    public void levelUp(int newLevel){
+        house.setLevel(newLevel);
     }
 
 }

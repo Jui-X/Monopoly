@@ -52,17 +52,12 @@ public class Player extends Tick implements Port {
     /**
      * 房屋数
      */
-    private List<Piece> pieces = new ArrayList<Piece>();
-
-    /**
-     * 房屋数
-     */
-    private List<House> houses = new ArrayList<House>();
+    private List<House> houses = null;
 
     /**
      * 旅馆数
      */
-    private List<Hotel> hotels = new ArrayList<Hotel>();
+    private List<Hotel> hotels = null;
 
     /**
      * 玩家图片
@@ -148,14 +143,6 @@ public class Player extends Tick implements Port {
         this.inJail = inJail;
     }
 
-    public List<Piece> getPieces() {
-        return pieces;
-    }
-
-    public void setPieces(List<Piece> pieces) {
-        this.pieces = pieces;
-    }
-
     public List<House> getHouses() {
         return houses;
     }
@@ -205,8 +192,8 @@ public class Player extends Tick implements Port {
     public Player(Monopoly game, int number){
         this.game = game;
         this.number = number;
-        this.houses = null;
-        this.hotels = null;
+        this.houses = new ArrayList<House>();
+        this.hotels = new ArrayList<Hotel>();
     }
 
     /**

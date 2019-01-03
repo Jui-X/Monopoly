@@ -68,8 +68,10 @@ public class Monopoly {
 
     /**
      * 当前操作玩家
+     * 和另一位玩家
      */
     private Player nowPlayer = null;
+    private Player otherPlayer = null;
 
     /**
      * 玩家目前状态
@@ -173,7 +175,7 @@ public class Monopoly {
     }
 
     public Monopoly() {
-        this.running = new GameController(this, nowPlayer, bank);
+
         this.initGame();
         // 向游戏状态中加入玩家模型
         this.setPlayers(players);
@@ -210,7 +212,6 @@ public class Monopoly {
         this.models.add(dice1);
 //        this.models.add(dice2);
 //        this.models.add(dice3);
-        //
         this.bank = new Bank();
         this.models.add(bank);
 
@@ -242,6 +243,10 @@ public class Monopoly {
     public void startGameInit() {
         // 设定当前游戏玩家
         this.nowPlayer = this.players.get(0);
+        // 设定当前玩家状态为“使用卡片”
+        this.nowPlayerState = GameState.STATE_THROWDICE;
+        // 随机设定点数
+        this.setPoint((int) (Math.random() * 6));
     }
 
     /**
@@ -272,11 +277,12 @@ public class Monopoly {
      *
      */
     public void pressButton() {
-        Player player = this.getNowPlayer();
-        if (player.getInJail() > 0) {
+        nowPlayer = this.getNowPlayer();
+        this.running = new GameController(this, nowPlayer, this.bank);
+        if (nowPlayer.getInJail() > 0) {
             this.nextState();
-            if (player.getInJail() > 0) {
-                this.textTip.showTextTip(player, player.getName() + "在监狱.", 3);
+            if (nowPlayer.getInJail() > 0) {
+                this.textTip.showTextTip(nowPlayer, nowPlayer.getName() + "在监狱.", 3);
             }
             this.nextState();
         } else {
@@ -306,7 +312,7 @@ public class Monopoly {
     public void movePlayer() {
         // 人物运动
         for (int i = 0; i < (60 / this.getNowPlayer().getLastTime()); i++) {
-            moveCotroller = new MoveCotroller(nowPlayer);
+            moveCotroller = new MoveCotroller(this, nowPlayer);
             // 移动玩家
             moveCotroller.moveOn();
         }
@@ -374,8 +380,10 @@ public class Monopoly {
         // 换人
         if (this.nowPlayer.equals(this.players.get(0))) {
             this.nowPlayer = this.players.get(1);
+            System.out.println(this.nowPlayer.getName());
         } else {
             this.nowPlayer = this.players.get(0);
+            System.out.println(this.nowPlayer.getName());
             // 结束后游戏天数增加
             day++;
         }
@@ -449,15 +457,14 @@ public class Monopoly {
     public void stopInHouse(Building building, Player player) {
         if (building.isPurchasability()) {// 玩家房屋
             if (building.getOwner() == null) { // 无人房屋
-                Piece nowPiece = building.getPiece();
-                int price = nowPiece.getPrice();
+                int price = building.getPrice();
                 int choose = JOptionPane.showConfirmDialog(
                         null,
                         "亲爱的:" + player.getName() + "\r\n" + "是否购买下这块地？\r\n"
                                 + "\r\n" + "价格：" + price + " 金币.");
                 if (choose == JOptionPane.OK_OPTION) {
                     // 执行买地操作
-                    running.purchasePiece(nowPiece);
+                    running.buildHouse(building, this.bank);
                     this.textTip.showTextTip(player, player.getName()
                             + " 买下了一块空地.花费了: " + price + "金币. ", 3);
                 } else {
@@ -471,7 +478,7 @@ public class Monopoly {
                             "亲爱的:" + player.getName() + "\r\n" + "是否升级这块地？\r\n" + "价格：" + price + " 金币.");
                     if (choose == JOptionPane.OK_OPTION) {
                         // 执行升级房屋操作
-                        running.buildHouse(building, bank);
+                        running.buildHouse(building, this.bank);
                         this.textTip.showTextTip(player, player.getName() + ".花费了 " + price
                                 + "金币. ", 3);
                     } else {

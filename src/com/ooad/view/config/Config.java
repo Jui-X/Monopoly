@@ -196,16 +196,9 @@ public class Config extends JFrame {
         cashPanel.add(cash);
         cashPanel.add(cashChoice);
 
-        JPanel infoPanel = new JPanel();
-        infoPanel.setBorder(BorderFactory.createTitledBorder(""));
-        JLabel info = new JLabel();
-        info.setText("<html>可以改变游戏的胜利条件.<strong>(默认破产为失败)</strong></html>");
-        infoPanel.add(info);
-
         panel.add(dayPanel);
         panel.add(moneyPanel);
         panel.add(cashPanel);
-        panel.add(infoPanel);
         return panel;
     }
 
