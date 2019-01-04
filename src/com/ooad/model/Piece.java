@@ -1,13 +1,12 @@
 package com.ooad.model;
 
 
+import com.ooad.controller.Monopoly;
 import com.ooad.model.Building.Hotel;
 import com.ooad.model.Building.House;
-import com.ooad.model.Building.Jail;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 import static com.ooad.Context.GameState.*;
 
@@ -68,6 +67,8 @@ public class Piece extends Tick implements Port {
      * 监狱信息
      */
     public static Point prison = new Point(0, 0);
+
+    protected int[][] land;
 
 
     public int getHouseNum() {
@@ -154,15 +155,25 @@ public class Piece extends Tick implements Port {
         this.pieceIMG =  new ImageIcon("img/background/land.jpg").getImage();
     }
 
-    protected int[][] land = {
+    protected int[][] land1 = {
+            // 模仿大富翁其中一个地图设置
+            { ORIGIN, PIONT_10, SPACE, SPACE, SPACE, SPACE, PIONT_50, SPACE, SPACE, SPACE, SPACE, PIONT_30, PRISON },
+            { PIONT_30, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, PIONT_10 },
+            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
+            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
+            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
+            { PIONT_10, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, PIONT_30 },
+            { PRISON, SPACE, SPACE, SPACE, SPACE, SPACE, PIONT_50, SPACE, SPACE, SPACE, SPACE, PIONT_10, PRISON}};
+
+    protected int[][] land2 = {
             // 模仿大富翁其中一个地图设置
             { ORIGIN, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, PRISON },
-            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
-            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
-            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
-            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
-            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET,NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
-            { PRISON, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE,SPACE, SPACE, SPACE, SPACE, PRISON}};
+            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
+            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
+            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
+            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
+            { SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE, NULL_SET, NULL_SET, NULL_SET, NULL_SET, NULL_SET, SPACE },
+            { PRISON, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, PRISON}};
 
     public int[][] getLand() {
         return land;
@@ -172,7 +183,13 @@ public class Piece extends Tick implements Port {
      * 开始游戏设置
      */
     @Override
-    public void startGameInit() { }
+    public void startGameInit() {
+        if (Monopoly.MAP == 1){
+            land = land1;
+        } else if (Monopoly.MAP == 2){
+            land = land2;
+        }
+    }
 
     @Override
     public void updateData(long tick) {

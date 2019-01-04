@@ -1,10 +1,7 @@
 package com.ooad.model;
 
 import com.ooad.Context.GameState;
-import com.ooad.model.Building.Building;
-import com.ooad.model.Building.Go;
-import com.ooad.model.Building.House;
-import com.ooad.model.Building.Jail;
+import com.ooad.model.Building.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +52,14 @@ public class Buildings extends Tick implements Port {
                         //设置全图监狱点
                         Piece.prison = new java.awt.Point(j * 60, i * 60);
                         break;
+                    case GameState.PIONT_10:
+                        buildings.add(new Point(i, j, 10));
+                        break;
+                    case GameState.PIONT_30:
+                        buildings.add(new Point(i, j, 30));
+                        break;
+                    case GameState.PIONT_50:
+                        buildings.add(new Point(i, j, 50));
                     default:
                         break;
                 }

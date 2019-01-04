@@ -98,7 +98,7 @@ public class DiceView extends Layer {
         //骰子绘制
         this.paintDice(g, dice, -12, -15);
         this.paintDice(g, dice2, 135, -15);
-        this.paintPoint(g, dice3, 65,65);
+        this.paintDice(g, dice3, 65,65);
         //骰子按钮显示
         this.showDice();
         // 骰子按钮刷新

@@ -23,8 +23,8 @@ public class Go extends Building{
     public Go(int posX, int posY){
         super(posX, posY);
         this.name = "GO";
-        this.reward = 2000;
-        this.passReward = 1000;
+        this.reward = 50;
+        this.passReward = 30;
     }
 
     public int getPassReward() {

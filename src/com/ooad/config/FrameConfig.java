@@ -8,6 +8,8 @@ import com.ooad.view.GameFrame;
 import com.ooad.view.StartFrame;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -108,10 +110,55 @@ public class FrameConfig extends JFrame {
         this.tabs.setOpaque(false);
         this.tabs.add("人物设置", this.createPlayerSelectPanel());
         this.tabs.setToolTipTextAt(0, "完成人物设置");
-//        this.tabs.setToolTipTextAt(1, "可以设置游戏场景");
+        this.tabs.add("场景设置", this.createMapSelectPanel());
+        this.tabs.setToolTipTextAt(1, "可以设置游戏场景");
         this.tabs.add("游戏设置", this.createGameSelectPanel());
         this.tabs.setToolTipTextAt(1, "可以设置游戏胜利条件等...");
         return tabs;
+    }
+
+    /**
+     *
+     * 地图选择面板
+     *
+     */
+    private JPanel createMapSelectPanel() {
+        JPanel jp = new JPanel();
+        jp.setLayout(new GridLayout());
+        jp.setBackground(new Color(235,236,237));
+        JPanel lPane = new JPanel(new BorderLayout());
+        String[] maps = { "\"MAP1\"", "\"MAP2\""};
+        final ImageIcon[] maps1 = {
+                new ImageIcon("img/other/1.png"),
+                new ImageIcon("img/other/2.png"),
+                new ImageIcon("img/other/3.png") };
+        final JList jlst = new JList(maps);
+        jlst.setSelectedIndex(0);
+        final JLabel mapV = new JLabel(maps1[0]);
+        final JButton ok = new JButton("确定");
+        ok.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                Monopoly.MAP = jlst.getSelectedIndex() + 1;
+                ok.setText("已选");
+            }
+        });
+        jlst.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                mapV.setIcon(maps1[jlst.getSelectedIndex()]);
+                ok.setText("确定");
+            }
+        });
+        lPane.add(jlst);
+        lPane.add(ok, BorderLayout.SOUTH);
+        JPanel rPane = new JPanel();
+        rPane.add(mapV);
+        JSplitPane jSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+                false, lPane, rPane);
+        jp.add(jSplitPane);
+        return jp;
     }
 
     /**

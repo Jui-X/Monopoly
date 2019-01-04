@@ -56,6 +56,10 @@ public class MoveCotroller {
                 // 停留在监狱
                 game.stopInPrison(b, player);
                 break;
+            case GameState.POINT_EVENT:
+                // 停留在点卷位
+                game.stopInPoint(b, player);
+                break;
         }
     }
 

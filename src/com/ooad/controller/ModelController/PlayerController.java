@@ -90,7 +90,7 @@ public class PlayerController {
 
     public void goPass(int reward){
         // 经过起点奖励
-        player.setCash(player.getCash() + reward);
+        player.setCash(player.getNx() + reward);
     }
 
     public boolean purchasePiece(){
@@ -149,12 +149,8 @@ public class PlayerController {
     }
 
     public boolean payRent(int rent){
-        if (player.getCash() >= rent){
-            // 交过路费
-            player.setCash(player.getCash() - rent);
-            return true;
-        }
-        else {return false;}
+        player.setCash(player.getCash() - rent);
+        return true;
     }
 
     public boolean payDeal(int price){

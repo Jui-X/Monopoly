@@ -91,12 +91,12 @@ public class GamePanel extends JPanel {
         // 文字显示面板UI
         this.textTipView = new TextTipView(0,0,1280,853, game.getTextTip());
         // 骰子事件UI
-        this.diceView = new DiceView(posX + 80, posY + 220, 250, 140, game);
+        this.diceView = new DiceView(posX + 80, posY + 200, 250, 160, game);
         // 游戏运转界面UI
         this.running = new RunningView(780, 0, 200, 80, game,this);
         // 玩家信息面板UI
         this.playersPanel = new PlayersPanel(posX + 80, posY + 66, 250,
-                140, game.getPlayers());
+                130, game.getPlayers());
         // 玩家信息面板显示
         this.playerInfo = new PlayerInfo(game.getPlayers(),this);
 

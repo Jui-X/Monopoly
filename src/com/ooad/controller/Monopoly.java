@@ -5,6 +5,7 @@ import com.ooad.model.*;
 import com.ooad.model.Building.Building;
 import com.ooad.model.Building.Go;
 import com.ooad.model.Building.Jail;
+import com.ooad.model.Building.Point;
 import com.ooad.util.MyThread;
 import com.ooad.view.GamePanel;
 
@@ -103,6 +104,11 @@ public class Monopoly {
      * 玩家目前状态
      */
     private int nowPlayerState;
+
+    /**
+     * 当前地图代码
+     */
+    public static int MAP = 1;
 
 
     public GamePanel getPanel() {
@@ -514,6 +520,7 @@ public class Monopoly {
                     } else {
                         this.textTip.showTextTip(player, player.getName()
                                 + " 金币不足,操作失败. ", 3);
+                        new Thread(new MyThread(this, 1)).start();
                     }
                 }
             } else {// 有人房屋
@@ -531,6 +538,7 @@ public class Monopoly {
                                 // 增加文本提示
                                 this.textTip.showTextTip(player, player.getName()
                                         + " 金币不足,操作失败. ", 3);
+                                new Thread(new MyThread(this, 1)).start();
                         }
                     }
                 } else {// 别人房屋
@@ -542,7 +550,6 @@ public class Monopoly {
                 }
             }
         }
-        new Thread(new MyThread(this, 1)).start();
     }
 
     /**
@@ -570,6 +577,18 @@ public class Monopoly {
         String text = ((Jail) b).getEvents()[random];
         this.textTip.showTextTip(player, player.getName() + text + "停留"
                 + (days - 1) + "天.", 3);
+        new Thread(new MyThread(this, 1)).start();
+    }
+
+    /**
+     *
+     * 停留在点卷位
+     *
+     */
+    public void stopInPoint(Building b, Player player) {
+        player.setNx(((Point) b).getPoint() + player.getNx());
+        this.textTip.showTextTip(player, player.getName() + " 获得 "
+                + ((Point) b).getPoint() + "点卷.", 3);
         new Thread(new MyThread(this, 1)).start();
     }
 

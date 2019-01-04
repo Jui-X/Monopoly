@@ -30,6 +30,11 @@ public class Player extends Tick implements Port {
     private int cash;
 
     /**
+     * 点卷
+     */
+    private int nx;
+
+    /**
      * 当前位置x坐标
      */
     private int x;
@@ -99,6 +104,14 @@ public class Player extends Tick implements Port {
 
     public void setCash(int cash) {
         this.cash = cash;
+    }
+
+    public int getNx() {
+        return nx;
+    }
+
+    public void setNx(int nx) {
+        this.nx = nx;
     }
 
     public int getX() {

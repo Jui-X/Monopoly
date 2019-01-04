@@ -86,7 +86,7 @@ public class GameState {
     /**
      * 玩家初始金钱
      */
-    public static int PLAYER_ORIGIN_CASH = 1000;
+    public static int PLAYER_ORIGIN_CASH = 8000;
 
     /**
      * 无建筑
@@ -97,6 +97,19 @@ public class GameState {
      * 空地
      */
     public final static int SPACE = 1;
+
+    /**
+     * 10元奖券
+     */
+    public final static int PIONT_10 = 2;
+    /**
+     * 30元奖券
+     */
+    public final static int PIONT_30 = 3;
+    /**
+     * 50元奖券
+     */
+    public final static int PIONT_50 = 4;
 
     /**
      * 起点
@@ -118,6 +131,8 @@ public class GameState {
 
 
     public  final static int PRISON_EVENT = 3;
+
+    public  final static int POINT_EVENT = 4;
 
     /**
      * 路过建筑返回状态
